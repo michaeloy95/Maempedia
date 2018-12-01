@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Register.IsMaemsellerRegisterPage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  RowSpacing="0"
+                  BackgroundColor="{StaticResource LightBackgroundColor}"
+                  Padding="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="35" />
+                </Grid.RowDefinitions>
+
+                <Label Text="Registrasi Berhasil"
+                       Grid.Row="0"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       FontSize="48"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0"/>
+                <c:FlatButton Text="Selesai"
+                              Grid.Row="1"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Fill"
+                              FontSize="Medium"
+                              FontAttributes="Bold"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              Command="{Binding CompleteCommand}"
+                              BorderRadius="30"
+                              Margin="10,5"/>
+                <Label Text="Ingin mendaftar sebagai Maemseller?"
+                       Grid.Row="2"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="End"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Small"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,5"/>
+                <c:FlatButton Text="Daftar Sebagai Maemseller"
+                              Grid.Row="3"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Fill"
+                              FontSize="Medium"
+                              TextColor="{StaticResource DarkTextColor}"
+                              BackgroundColor="{StaticResource DarkBackgroundColor}"
+                              BorderColor="{StaticResource DarkBackgroundColor}"
+                              BorderWidth="1"
+                              BorderRadius="30"
+                              Margin="10"
+                              Command="{Binding RegisterMaemsellerCommand}"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Feedbacks.SuggestionPage">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{StaticResource LightBackgroundColor}"
+                    Padding="20,0">
+            <StackLayout>
+                <Label Text="Kritik dan Saran"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,20,0,5"/>
+                <Label Text="Kami ingin mendengar apa yang anda suka dari Maempedia dan apa yang anda ingin untuk kami tingkatkan lebih lagi."
+                       VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="None"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,5,0,20"/>
+                <Label Text="Kendala"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Editor Text="{Binding ProblemText}"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill"
+                        FontSize="Medium"
+                        TextColor="{StaticResource MediumGrayTextColor}"
+                        HeightRequest="100"
+                        Margin="0,5"/>
+                <Label Text="Ide atau Saran"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Editor Text="{Binding SuggestionText}"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill"
+                        FontSize="Medium"
+                        TextColor="{StaticResource MediumGrayTextColor}"
+                        HeightRequest="100"
+                        Margin="0,5"/>
+                <c:FlatButton Text="Kirim"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Fill"                          
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              Margin="0,5"
+                              Command="{Binding SendMessageCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

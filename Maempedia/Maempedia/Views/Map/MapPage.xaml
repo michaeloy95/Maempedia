@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:gm="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             x:Class="Maempedia.Views.Map.MapPage"
+             NavigationPage.HasNavigationBar="True"
+             Title="Jelajah Kuliner Sekitar">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand">
+            <c:SearchEntry x:Name="SearchEntry"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Fill"
+                           HeightRequest="50"
+                           Placeholder="Tentukan lokasi"
+                           PlaceholderColor="{StaticResource LightTextColor}"
+                           TextColor="{StaticResource DarkTextColor}"
+                           BackgroundColor="{StaticResource LightBackgroundColor}"
+                           Focused="OnSearchEntryFocused"
+                           Unfocused="OnSearchEntryUnfocused"
+                           TextChanged="OnSearchEntryTextChanged"
+                           SearchButtonPressed="OnSearchEntryCompleted"
+                           Margin="15,5" />
+            <StackLayout x:Name="SearchLayout"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         IsVisible="False">
+                <ListView x:Name="AddressListView"
+                          ItemsSource="{Binding AddressList}"
+                          ItemSelected="AddressListView_ItemSelected"
+                          CachingStrategy="RecycleElement"
+                          SeparatorVisibility="Default"
+                          SeparatorColor="{StaticResource LightBorderColor}"
+                          IsPullToRefreshEnabled="False"
+                          BackgroundColor="{StaticResource LightBackgroundColor}"
+                          HasUnevenRows="True"
+                          Margin="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="10,5">
+                                    <Label Text="{Binding Address}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
+                                           FontSize="Medium"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <RelativeLayout x:Name="MapLayout"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="{StaticResource LightBackgroundColor}">
+                <gm:Map x:Name="MyMap"
+                        InitialCameraUpdate="-7.25, 112.75, 14, 0, 0"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}"
+                        IsShowingUser="False"
+                        MyLocationEnabled="False"
+                        IsTrafficEnabled="False"
+                        IsIndoorEnabled="False"
+                        MapType="Street"
+                        HasZoomEnabled="False"
+                        MapClicked="OnMyMapClicked"
+                        MyLocationButtonClicked="OnMapMyLocationButtonClicked"
+                        InfoWindowClicked="OnMapInfoWindowClicked"/>
+                <StackLayout x:Name="LoadingLayout"
+                             Orientation="Horizontal"
+                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                             HeightRequest="35"
+                             Opacity="0.7"
+                             BackgroundColor="Black"
+                             IsVisible="True">
+                    <Label Text="Loading... "
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource LightTextColor}"/>
+                    <ActivityIndicator HorizontalOptions="StartAndExpand"
+                                       VerticalOptions="Center"
+                                       IsRunning="True"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       Color="{StaticResource LightTextColor}"/>
+                </StackLayout>
+            </RelativeLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

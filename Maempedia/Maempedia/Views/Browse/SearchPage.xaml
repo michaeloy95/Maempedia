@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:vc="clr-namespace:Maempedia.ViewCells"
+             x:Class="Maempedia.Views.Browse.SearchPage"
+             Title="Cari Kuliner">
+    <ContentPage.Content>
+        <Grid VerticalOptions="Fill"
+              HorizontalOptions="Fill"
+              RowSpacing="0"
+              BackgroundColor="{StaticResource LightBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout x:Name="HeaderLayout"
+                         Grid.Row="0"
+                         VerticalOptions="Fill"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource Primary}"
+                         Padding="5">
+                <c:SearchEntry x:Name="SearchEntry"
+                               Text="{Binding SearchEntryText}"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Fill"
+                               HeightRequest="50"
+                               Placeholder="Coba &apos;Sate&apos;"
+                               PlaceholderColor="{StaticResource LightTextColor}"
+                               TextColor="{StaticResource DarkTextColor}"
+                               BackgroundColor="{StaticResource LightBackgroundColor}"
+                               SearchCommand="{Binding SearchCommand}"
+                               Margin="15,0" />
+            </StackLayout>
+            <StackLayout x:Name="MenuListLayout"
+                         Grid.Row="1"
+                         BackgroundColor="{StaticResource LightBackgroundColor}">
+                <c:AdvancedListView x:Name="MenuListView"
+                                    ItemsSource="{Binding MenuList}"
+                                    ItemSelected="ListView_ItemSelected"
+                                    HasUnevenRows="True"
+                                    SeparatorVisibility="Default"
+                                    SeparatorColor="{StaticResource LightBorderColor}"
+                                    IsPullToRefreshEnabled="True"
+                                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                                    RefreshCommand="{Binding SearchCommand}"
+                                    BackgroundColor="{StaticResource LightBackgroundColor}"
+                                    Margin="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <vc:MenuListCell/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <StackLayout VerticalOptions="Start"
+                                     HorizontalOptions="Fill"
+                                     IsVisible="{Binding IsLoadingMore}"
+                                     Padding="0,15">
+                            <ActivityIndicator HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               IsRunning="True"
+                                               WidthRequest="25"
+                                               HeightRequest="25"
+                                               Color="{StaticResource DarkTextColor}"/>
+                        </StackLayout>
+                    </ListView.Footer>
+                </c:AdvancedListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

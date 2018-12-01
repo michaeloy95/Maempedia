@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Maempedia.Views.Menu.MenuViewPage"
+             Title="{Binding SelectedMenu.Name}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="BtnPromote" Icon="ic_promoted_inactive" Order="Primary" Command="{Binding PromoteMenuCommand}" />
+        <ToolbarItem Text="Hapus Menu" Order="Secondary" Command="{Binding DeleteMenuCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{StaticResource LightBackgroundColor}">
+            <StackLayout HorizontalOptions="Fill"
+                         Orientation="Vertical"
+                         Padding="30,10">
+                <Label Text="Para pencinta kuliner akan melihat info-info ini mengenai postingan menu anda. Klik pratinjau untuk melihat sosok postingan anda."
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       FontAttributes="None"
+                       FontSize="Small"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,2" />
+                <c:FlatButton Text="Pratinjau &gt;"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Start"
+                              FontSize="Medium"
+                              TextColor="{StaticResource DarkTextColor}"
+                              BackgroundColor="{StaticResource LightBackgroundColor}"
+                              BorderColor="{StaticResource LightBackgroundColor}"
+                              BorderWidth="1"
+                              BorderRadius="30"
+                              Margin="0,2"
+                              Command="{Binding PreviewCommand}"/>
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightBorderColor}"
+                         HeightRequest="1"
+                         Margin="0,10"/>
+                <Label Text="Foto Menu"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <ff:CachedImage Source="{Binding SelectedMenu.ImageSource}"
+                                HorizontalOptions="Fill"
+                                WidthRequest="{Binding MenuImageWidth}"
+                                Aspect="AspectFit"
+                                CacheType="{x:Null}"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="menuplaceholder.png"
+                                ErrorPlaceholder="menuplaceholder.png"
+                                Success="CachedImage_Success"
+                                Margin="0,5"/>
+                <c:FlatButton Text="Pilih Foto"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Center"
+                              FontSize="Medium"
+                              TextColor="{StaticResource MediumGrayTextColor}"
+                              BorderColor="{StaticResource MediumGrayTextColor}"
+                              BorderWidth="1"
+                              BackgroundColor="{StaticResource Primary}"
+                              Margin="0,5"
+                              Command="{Binding UploadCommand}"/>
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightBorderColor}"
+                         HeightRequest="1"
+                         Margin="0,10"/>
+                <Label Text="Nama"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Entry Text="{Binding NameText, Mode=TwoWay}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand"
+                       FontSize="Medium"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,5"/>
+                <Label Text="Deskripsi"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Editor Text="{Binding DescriptionText, Mode=TwoWay}"
+                        VerticalOptions="Start"
+                        HorizontalOptions="FillAndExpand"
+                        FontSize="Medium"
+                        TextColor="{StaticResource MediumGrayTextColor}"
+                        Margin="0,5"/>
+                <Label Text="Harga"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Entry Text="{Binding PriceText, Mode=TwoWay}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand"
+                       FontSize="Medium"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Keyboard="Numeric"
+                       Margin="0,5"/>
+                <Label Text="Porsi"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Entry Text="{Binding PortionText, Mode=TwoWay}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand"
+                       FontSize="Medium"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,5"/>
+                <c:FlatButton Text="Simpan"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Fill"
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderColor="Transparent"
+                              BorderWidth="1"
+                              BorderRadius="30"
+                              Command="{Binding SaveCommand}"
+                              Margin="10,20"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

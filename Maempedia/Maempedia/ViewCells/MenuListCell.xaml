@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Maempedia.ViewCells.MenuListCell">
+    <ViewCell.View>
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     Orientation="Vertical"
+                     BackgroundColor="Transparent"
+                     Padding="0,10">
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Start"
+                         Orientation="Horizontal"
+                         Padding="15,7"
+                         BackgroundColor="Transparent">
+                <ff:CachedImage x:Name="OwnerProfilePicture"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                WidthRequest="40"
+                                Aspect="AspectFit"
+                                CacheType="{x:Null}"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="profilepictureplaceholder.png"
+                                ErrorPlaceholder="profilepictureplaceholder.png"
+                                TransformPlaceholders="False"
+                                RetryCount="0"
+                                Margin="0,0,5,0">
+                    <ff:CachedImage.Transformations>
+                        <fft:CircleTransformation />
+                    </ff:CachedImage.Transformations>
+                    <ff:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOwnerProfileTapped"/>
+                    </ff:CachedImage.GestureRecognizers>
+                </ff:CachedImage>
+                <Label Text="{Binding Owner.Name}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="2,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOwnerProfileTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <c:AdLabel Text="Premium"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           FontSize="Micro"
+                           FontAttributes="None"
+                           TextColor="#006621"
+                           Margin="2,0"
+                           IsVisible="{Binding Promoted}"/>
+                <Image Source="whatsapp.png"
+                       HorizontalOptions="EndAndExpand"
+                       VerticalOptions="Center"
+                       WidthRequest="25">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnWhatsAppTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <Frame HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   OutlineColor="{StaticResource DarkBackgroundColor}"
+                   Padding="0">
+                <ff:CachedImage x:Name="MenuImage"
+                                HorizontalOptions="Fill"
+                                Aspect="AspectFill"
+                                CacheType="{x:Null}"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="menuplaceholder.png"
+                                ErrorPlaceholder="menuplaceholder.png"
+                                Margin="0"/>
+            </Frame>
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Start"
+                         Orientation="Vertical"
+                         Padding="15,7"
+                         BackgroundColor="Transparent">
+                <Label Text="{Binding Name}"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Center"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="5,0"/>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="Start"
+                             Orientation="Horizontal"
+                             BackgroundColor="Transparent"
+                             Margin="5,0">
+                    <ff:CachedImage x:Name="LikeImage"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    CacheType="{x:Null}"
+                                    DownsampleToViewSize="True"
+                                    FadeAnimationEnabled="True"
+                                    FadeAnimationForCachedImages="True"
+                                    Margin="0">
+                        <ff:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLikeImageTapped"/>
+                        </ff:CachedImage.GestureRecognizers>
+                    </ff:CachedImage>
+                    <Label Text="{Binding Like}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="2,0"/>
+                </StackLayout>
+                <Label Text="{Binding PriceString}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="5,0"/>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="Start"
+                             Orientation="Horizontal"
+                             BackgroundColor="Transparent"
+                             Margin="5,0">
+                    <Label Text="{Binding Owner.Location.Address}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           FontSize="Small"
+                           FontAttributes="None"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           Margin="0"/>
+                    <Label Text="{Binding Owner.Distance}"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           Margin="0"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ViewCell.View>
+</ViewCell>

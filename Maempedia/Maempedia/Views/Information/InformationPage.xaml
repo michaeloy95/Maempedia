@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maempedia.Views.Information.InformationPage"
+             NavigationPage.HasNavigationBar="True"
+             Title="Informasi">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{StaticResource LightBackgroundColor}"
+                    Padding="20,10,20,30">
+            <StackLayout>
+                <StackLayout Padding="0,5">
+                    <Label Text="Apakah itu Maempedia?"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           FontSize="Large"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0,5"/>
+                    <Label Text="Maempedia adalah sebuah aplikasi yang memudahkan kita untuk menjelajahi atau mencari makanan dan minuman yang ada di sekitar kita. Banyak sekali menu-menu baru dan unik yang dapat kita temukan melalui aplikasi ini."
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           FontSize="Small"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0,5"/>
+                    <Label Text="Bagi para pengusaha kuliner, Maempedia dapat memberikan kemudahan untuk mempromosikan menu andalan anda secara online."
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           FontSize="Small"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           Margin="0,5"/>
+                    <Label Text="{Binding ActionText}"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           FontSize="Small"
+                           TextColor="{StaticResource ActiveColor}"
+                           Margin="0,5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ActionCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightTextColor}"
+                         HeightRequest="1"
+                         Margin="0,15"/>
+                <StackLayout Padding="0,5">
+                    <Label Text="Contact Support"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0,5"/>
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="Start"
+                                 Orientation="Horizontal"
+                                 Margin="0,3">
+                        <Image Source="ic_call.png"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Start"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               Margin="3,0"/>
+                        <Label Text="0812-5941-8874 / 081-9867-009"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start"
+                               FontSize="Medium"
+                               FontAttributes="None"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="5,0"/>
+                    </StackLayout>
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="Start"
+                                 Orientation="Horizontal"
+                                 Margin="0,3">
+                        <Image Source="ic_email.png"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Start"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               Margin="3,0"/>
+                        <Label Text="admin@maempedia.com"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start"
+                               FontSize="Medium"
+                               FontAttributes="None"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="5,0"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

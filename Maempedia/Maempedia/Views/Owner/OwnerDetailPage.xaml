@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gm="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:vc="clr-namespace:Maempedia.ViewCells"
+             x:Class="Maempedia.Views.Owner.OwnerDetailPage"
+             Title="{Binding SelectedOwner.Name}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="whatsapp.png" Command="{Binding OpenWhatsAppCommand}" />
+        <ToolbarItem Icon="ic_share.png" Command="{Binding ShareCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView InputTransparent="True"
+                    BackgroundColor="{StaticResource LightBackgroundColor}">
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         Orientation="Vertical"
+                         Padding="0,10,0,30">
+                <StackLayout VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand"
+                             Orientation="Vertical"
+                             Padding="30,0">
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="FillAndExpand"
+                                 Orientation="Horizontal">
+                        <ff:CachedImage Source="{Binding SelectedOwner.ProfilePicture}" 
+                                        CacheType="{x:Null}"
+                                        VerticalOptions="Start"
+                                        HorizontalOptions="Center"
+                                        WidthRequest="125"
+                                        Aspect="AspectFit"
+                                        DownsampleToViewSize="True"
+                                        LoadingPlaceholder="profilepictureplaceholder.png"
+                                        ErrorPlaceholder="profilepictureplaceholder.png"
+                                        Margin="5,5,15,15">
+                            <ff:CachedImage.Transformations>
+                                <fft:CircleTransformation />
+                            </ff:CachedImage.Transformations>
+                        </ff:CachedImage>
+                        <StackLayout VerticalOptions="Fill"
+                                     HorizontalOptions="Fill"
+                                     Orientation="Vertical">
+                            <Label Text="{Binding SelectedOwner.Name}"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   FontSize="Large"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource DarkTextColor}"
+                                   Margin="3,10,3,3"/>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="Start"
+                                         Orientation="Horizontal"
+                                         Margin="3,0">
+                                <Image Source="ic_call.png"
+                                       VerticalOptions="Start"
+                                       HorizontalOptions="Start"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       Margin="3,0"/>
+                                <Label Text="{Binding SelectedOwner.ContactNumber}"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       FontSize="Small"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource DarkTextColor}"
+                                       Margin="5,0"/>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="Start"
+                                         Orientation="Horizontal"
+                                         Margin="3,0">
+                                <Image Source="ic_email.png"
+                                       VerticalOptions="Start"
+                                       HorizontalOptions="Start"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       Margin="3,0"/>
+                                <Label Text="{Binding SelectedOwner.Email}"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       FontSize="Small"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource DarkTextColor}"
+                                       Margin="5,0"/>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="Start"
+                                         Orientation="Horizontal"
+                                         Margin="3,0">
+                                <Image Source="ic_time.png"
+                                       VerticalOptions="Start"
+                                       HorizontalOptions="Start"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       Margin="3,0"/>
+                                <Label Text="{Binding WorkingHours}"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       FontSize="Small"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource DarkTextColor}"
+                                       Margin="5,0"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label Text="{Binding SelectedOwner.Headline}"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Start"
+                           FontSize="Small"
+                           FontAttributes="None"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0,5,0,30"/>
+                </StackLayout>
+                <gm:Map x:Name="MyMap"
+                        InitialCameraUpdate="-7.25, 112.75, 17, 0, 0"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill"
+                        HeightRequest="150"
+                        IsShowingUser="False"
+                        IsTrafficEnabled="False"
+                        IsIndoorEnabled="False"
+                        MapType="Street"
+                        MapClicked="OnMapClicked"
+                        HasZoomEnabled="False"/>
+                <Label Text="{Binding SelectedOwner.Location.Address}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="Small"
+                        FontAttributes="Italic"
+                        TextColor="{StaticResource DarkTextColor}"
+                        Margin="30,5"/>
+                <BoxView VerticalOptions="Center"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="{StaticResource LightBorderColor}"
+                        HeightRequest="1"
+                        Margin="20,15"/>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             Padding="0,5">
+                    <Label Text="Daftar Menu"
+                           VerticalOptions="Start"
+                           HorizontalOptions="StartAndExpand"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="30,0"/>
+                    <c:BindableScrollView x:Name="MenuListView"
+                                          Orientation="Horizontal"
+                                          VerticalOptions="Fill"
+                                          HorizontalOptions="FillAndExpand"
+                                          ItemsSource="{Binding MenuList}"
+                                          ItemSelected="MenuListView_ItemSelected"
+                                          BackgroundColor="{StaticResource LightBackgroundColor}"
+                                          IsVisible="{Binding HasMenu}"
+                                          Padding="15,10">
+                        <c:BindableScrollView.ItemTemplate>
+                            <DataTemplate>
+                                <vc:HorizontalMenuCell/>
+                            </DataTemplate>
+                        </c:BindableScrollView.ItemTemplate>
+                    </c:BindableScrollView>
+                    <Label Text="Belum ada menu yang terunggah."
+                           VerticalOptions="Start" 
+                           HorizontalOptions="FillAndExpand"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Small"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           IsVisible="{Binding HasNoMenu}"
+                           Margin="0"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

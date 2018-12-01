@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Register.ProfilePictureRegisterPage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="20,10">
+                <Label Text="Unggah foto profil anda"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,10">
+                </Label>
+                <ff:CachedImage x:Name="profileImage"
+                                Source="{Binding ImageSource}"
+                                VerticalOptions="Start" 
+                                HorizontalOptions="CenterAndExpand"
+                                ErrorPlaceholder="profilepictureplaceholder.png"
+                                LoadingPlaceholder="profilepictureplaceholder.png"
+                                DownsampleToViewSize="True"
+                                WidthRequest="{Binding ImageWidth}"
+                                Aspect="AspectFit"
+                                Margin="55,5"
+                                Success="CachedImage_Success">
+                    <ff:CachedImage.Transformations>
+                        <fft:CircleTransformation />
+                    </ff:CachedImage.Transformations>
+                </ff:CachedImage>
+                <c:FlatButton Text="Pilih Foto"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Center"
+                              FontSize="Medium"
+                              TextColor="{StaticResource MediumGrayTextColor}"
+                              BorderColor="{StaticResource MediumGrayTextColor}"
+                              BorderWidth="1"
+                              BackgroundColor="{StaticResource Primary}"
+                              Margin="0,5"
+                              Command="{Binding UploadCommand}"/>
+                <c:FlatButton Text="{Binding NextText}"
+                              VerticalOptions="Start"
+                              HorizontalOptions="End"
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              Margin="0,10"
+                              Command="{Binding NextCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

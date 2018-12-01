@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Maempedia.Views.Notification.NotificationDetailPage"
+             Title="{Binding SelectedNotification.Title}">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{StaticResource LightBackgroundColor}">
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         Orientation="Vertical">
+                <Frame VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand"
+                       OutlineColor="{StaticResource DarkBackgroundColor}"
+                       Padding="0">
+                    <ff:CachedImage Source="{Binding SelectedNotification.ImageSource}"
+                                    HorizontalOptions="Fill"
+                                    Aspect="AspectFit"
+                                    CacheType="{x:Null}"
+                                    DownsampleToViewSize="True"
+                                    LoadingPlaceholder="menuplaceholder.png"
+                                    ErrorPlaceholder="menuplaceholder.png"
+                                    Margin="0"/>
+                </Frame>
+                <StackLayout VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand"
+                             Orientation="Vertical"
+                             Padding="10,7">
+                    <Label Text="{Binding SelectedNotification.Title}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="5"/>
+                    <Label Text="{Binding SelectedNotification.Message}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           FontSize="Small"
+                           FontAttributes="None"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="5"/>
+                    <Label Text="{Binding SelectedNotification.TimeString}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           FontSize="Small"
+                           FontAttributes="None"
+                           TextColor="{StaticResource LightTextColor}"
+                           Margin="5"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

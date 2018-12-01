@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:vc="clr-namespace:Maempedia.ViewCells"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Maempedia.Views.Notification.NotificationPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource LightBackgroundColor}">
+            <StackLayout x:Name="NullNotificationLayout"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="30">
+                <Label Text="Belum ada notifikasi"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       TextColor="{StaticResource DarkTextColor}"/>
+                <Label Text="Kita akan selalu menginformasikan promo-promo terbaru dari menu-menu kuliner favorit anda."
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       TextColor="{StaticResource MediumGrayTextColor}"/>
+            </StackLayout>
+            <ListView x:Name="NotificationListView"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      ItemsSource="{Binding NotificationList}"
+                      ItemSelected="ListView_ItemSelected"
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement"
+                      SeparatorVisibility="Default"
+                      SeparatorColor="{StaticResource LightBorderColor}"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      BackgroundColor="{StaticResource LightBackgroundColor}"
+                      Margin="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <vc:NotificationListCell/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

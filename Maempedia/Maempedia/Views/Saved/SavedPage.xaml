@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:vc="clr-namespace:Maempedia.ViewCells"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Maempedia.Views.Saved.SavedPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="search.png" Clicked="OnSearchClicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand"
+              RowSpacing="0"
+              BackgroundColor="{StaticResource LightBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame x:Name="SearchBar"
+                   Grid.Row="0"
+                   VerticalOptions="Start"
+                   HorizontalOptions="FillAndExpand"
+                   HasShadow="False"
+                   BackgroundColor="{StaticResource Primary}"
+                   IsVisible="False"
+                   Padding="5">
+                <StackLayout VerticalOptions="Start"
+                             HorizontalOptions="Fill"
+                             Orientation="Vertical">
+                    <c:SearchEntry VerticalOptions="Start"
+                                   HorizontalOptions="Fill"
+                                   HeightRequest="50"
+                                   Placeholder="Masukan kata kunci menu"
+                                   PlaceholderColor="{StaticResource LightTextColor}"
+                                   TextColor="{StaticResource DarkTextColor}"
+                                   BackgroundColor="{StaticResource LightBackgroundColor}"
+                                   Margin="10,5"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Grid.Row="1"
+                         Margin="0">
+                <ListView x:Name="MenuListView"
+                          ItemsSource="{Binding MenuList}"
+                          ItemSelected="ListView_ItemSelected"
+                          HasUnevenRows="True"
+                          CachingStrategy="RecycleElement"
+                          SeparatorVisibility="Default"
+                          SeparatorColor="{StaticResource LightBorderColor}"
+                          IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          BackgroundColor="{StaticResource LightBackgroundColor}"
+                          Margin="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <vc:MenuListCell/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Header>
+                        <StackLayout x:Name="NullMenuLayout"
+                                     VerticalOptions="FillAndExpand"
+                                     HorizontalOptions="FillAndExpand"
+                                     Padding="30">
+                            <StackLayout.Triggers>
+                                <Trigger TargetType="StackLayout" Property="IsVisible" Value="False">
+                                    <Setter Property="HeightRequest" Value="0" />
+                                    <Setter Property="Padding" Value="0" />
+                                </Trigger>
+                            </StackLayout.Triggers>
+                            <Label Text="Belum ada menu tersimpan"
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Start"
+                                   TextColor="{StaticResource DarkTextColor}"/>
+                            <Label Text="Jika anda melihat menu yang anda suka, sentuh gambar hati untuk menyimpannya ke dalam daftar simpanan. Anda dapat mengakses kembali menu-menu yang telah anda simpan di saat mendatang."
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Start"
+                                   FontSize="Small"
+                                   TextColor="{StaticResource MediumGrayTextColor}"/>
+                        </StackLayout>
+                    </ListView.Header>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

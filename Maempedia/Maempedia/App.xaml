@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Maempedia.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#F8F8F8</Color>
+            <Color x:Key="PrimaryDark">#F8F8F8</Color>
+            <Color x:Key="Accent">#2D2D2D</Color>
+            <Color x:Key="LightBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="DarkBackgroundColor">#F8F8F8</Color>
+            <Color x:Key="LightBorderColor">#E6E6E6</Color>
+            <Color x:Key="DarkTextColor">#2D2D2D</Color>
+            <Color x:Key="MediumGrayTextColor">#646464</Color>
+            <Color x:Key="LightTextColor">#C8C8C8</Color>
+            <Color x:Key="ActiveColor">#CF000F</Color>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="{StaticResource DarkTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

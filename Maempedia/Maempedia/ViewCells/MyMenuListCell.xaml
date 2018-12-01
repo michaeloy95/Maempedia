@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:c="clr-namespace:Maempedia.Custom"
+          xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+          x:Class="Maempedia.ViewCells.MyMenuListCell">
+    <StackLayout>
+        <Grid VerticalOptions="Start"
+              HorizontalOptions="FillAndExpand"
+              ColumnSpacing="10"
+              Padding="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0"
+                         VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="15,10">
+                <c:AdLabel Text="Premium"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           FontSize="Micro"
+                           FontAttributes="None"
+                           TextColor="#006621"
+                           Margin="8,0"
+                           IsVisible="{Binding Promoted}"/>
+                <Label Text="{Binding Name}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="StartAndExpand"
+                       FontSize="Medium"
+                       FontAttributes="None"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="5,0"/>
+                <Label x:Name="MenuHeadlineText"
+                       Text="{Binding Headline}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="StartAndExpand"
+                       FontSize="Small"
+                       FontAttributes="None"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="5,0"/>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="Start"
+                             Orientation="Horizontal"
+                             BackgroundColor="Transparent"
+                             Margin="5,0">
+                    <Image Source="heart_full.png"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           WidthRequest="18"
+                           Margin="0"/>
+                    <Label Text="{Binding Like}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           FontSize="Small"
+                           FontAttributes="None"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           Margin="2,0"/>
+                </StackLayout>
+                <c:FlatButton x:Name="PromoteButton"
+                              Text="Jadikan Premium"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Start"
+                              FontSize="Small"
+                              TextColor="{StaticResource ActiveColor}"
+                              BackgroundColor="{StaticResource LightBackgroundColor}"
+                              BorderColor="{StaticResource LightBackgroundColor}"
+                              BorderWidth="1"
+                              BorderRadius="30"
+                              Margin="0,0"
+                              IsVisible="True"
+                              Clicked="Promote_Clicked"/>
+            </StackLayout>
+            <StackLayout x:Name="MenuImageLayout"
+                         Grid.Column="1"
+                         VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="20,15">
+                <ff:CachedImage x:Name="MenuImage"
+                                HorizontalOptions="Fill"
+                                Aspect="AspectFill"
+                                CacheType="{x:Null}"
+                                DownsampleToViewSize="True"
+                                Success="MenuImage_Success"
+                                LoadingPlaceholder="menuplaceholder.png"
+                                ErrorPlaceholder="menuplaceholder.png"
+                                Margin="5"/>
+            </StackLayout>
+        </Grid>
+        <BoxView VerticalOptions="Center"
+                 HorizontalOptions="FillAndExpand"
+                 BackgroundColor="{StaticResource LightBorderColor}"
+                 HeightRequest="1"
+                 Margin="20,0"/>
+    </StackLayout>
+</ViewCell>

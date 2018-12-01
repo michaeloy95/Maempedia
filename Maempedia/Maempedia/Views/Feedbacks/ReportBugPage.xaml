@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Feedbacks.ReportBugPage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{StaticResource LightBackgroundColor}"
+                    Padding="20,0">
+            <StackLayout>
+                <Label Text="Laporkan Bug"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,20,0,5"/>
+                <Label Text="Setiap laporan dari anda dapat membantu kami membuat Maempedia menjadi lebih baik. Laporan bug bersama dengan tahap langkah memunculkan bug akan sangat membantu kami."
+                       VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="None"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,5,0,20"/>
+                <Editor Text="{Binding MessageText}"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill"
+                        FontSize="Medium"
+                        TextColor="{StaticResource MediumGrayTextColor}"
+                        HeightRequest="100"
+                        Margin="0,5"/>
+                <c:FlatButton Text="Kirim"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Fill"                          
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              Margin="0,5"
+                              Command="{Binding SendReportCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

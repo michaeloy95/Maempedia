@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maempedia.Views.Options.SettingsPage"
+             NavigationPage.HasNavigationBar="True"
+             Title="Pengaturan">
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{StaticResource LightBackgroundColor}"
+                    Padding="20,0">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Padding="0,10">
+                    <Label Text="Notifikasi"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"
+                           FontSize="Medium"
+                           TextColor="{StaticResource DarkTextColor}"/>
+                    <Switch IsToggled="{Binding IsPushNotification, Mode=TwoWay}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"/>
+                </StackLayout>
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightTextColor}"
+                         HeightRequest="1"
+                         Margin="0,10"/>
+                <StackLayout Orientation="Horizontal"
+                             Padding="0,10">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenPrivacyPolicyCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Text="Kebijaksanaan Privasi"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"
+                           FontSize="Medium"
+                           TextColor="{StaticResource DarkTextColor}"/>
+                </StackLayout>
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightTextColor}"
+                         HeightRequest="1"
+                         Margin="0,10"/>
+                <StackLayout Orientation="Horizontal"
+                             Padding="0,10">
+                    <Label Text="Versi"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"
+                           FontSize="Medium"
+                           TextColor="{StaticResource DarkTextColor}"/>
+                    <Label Text="{Binding VersionText}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           FontSize="Medium"
+                           TextColor="{StaticResource ActiveColor}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

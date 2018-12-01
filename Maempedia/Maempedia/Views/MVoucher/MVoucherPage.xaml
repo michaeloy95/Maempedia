@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maempedia.Views.MVoucher.MVoucherPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource LightBackgroundColor}">
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="30">
+                <Label Text="Fitur belum tersedia"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       TextColor="{StaticResource DarkTextColor}"/>
+                <Label Text="Fitur MVoucher sedang dalam proses. Silahkan tunggu update Maempedia versi mendatang."
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       TextColor="{StaticResource MediumGrayTextColor}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

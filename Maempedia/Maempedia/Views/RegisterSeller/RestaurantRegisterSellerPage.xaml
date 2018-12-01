@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.RegisterSeller.RestaurantRegisterSellerPage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Padding="20,0"
+                  ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="0"
+                       Text="Tentang Kuliner anda"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,20">
+                </Label>
+                <Label Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="1"
+                       Text="Nama Kuliner"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Entry x:Name="NameEntry"
+                       Text="{Binding NameText}"
+                       Grid.Column="0"
+                       Grid.Row="2"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Fill"
+                       FontSize="Medium"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Focused="OnEntryFocused"
+                       Unfocused="OnNameEntryUnfocused"
+                       Completed="OnEntryCompleted"
+                       Margin="0,5"/>
+                <ActivityIndicator Grid.Column="1"
+                                   Grid.Row="2"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   WidthRequest="22"
+                                   HeightRequest="22"
+                                   IsRunning="True"
+                                   Color="{StaticResource ActiveColor}"
+                                   IsVisible="{Binding NameIsChecking}"/>
+                <Image Grid.Column="1"
+                       Grid.Row="2"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       WidthRequest="22"
+                       HeightRequest="22"
+                       Source="check.png"
+                       IsVisible="{Binding NameIsValid}"/>
+                <Label Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="3"
+                       Text="Waktu Buka"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <StackLayout Grid.Column="0"
+                             Grid.Row="4"
+                             Orientation="Horizontal">
+                    <TimePicker x:Name="OpeningTimePicker"
+                                Time="{Binding OpeningTime, Mode=TwoWay}"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                WidthRequest="100"
+                                TextColor="{StaticResource MediumGrayTextColor}"
+                                Margin="0,5"/>
+                    <Label Text="-"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           Margin="5"/>
+                    <TimePicker x:Name="ClosingTimePicker"
+                                Time="{Binding ClosingTime, Mode=TwoWay}"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                WidthRequest="100"
+                                TextColor="{StaticResource MediumGrayTextColor}"
+                                Margin="0,5"/>
+                </StackLayout>
+                <Label Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="5"
+                       Text="Keterangan"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Editor x:Name="HeadlineEditor"
+                        Text="{Binding HeadlineText}"
+                        Grid.Column="0"
+                        Grid.Row="6"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill"
+                        FontSize="Medium"
+                        TextColor="{StaticResource MediumGrayTextColor}"
+                        HeightRequest="100"
+                        Completed="OnEditorCompleted"
+                        Margin="0,5"/>
+                <c:FlatButton Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              Grid.Row="7"
+                              Text="Lanjutkan"
+                              VerticalOptions="Start"
+                              HorizontalOptions="End"
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              Margin="0,5"
+                              IsEnabled="{Binding NextCommandEnabled, Mode=TwoWay}"
+                              Command="{Binding NextCommand}"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

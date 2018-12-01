@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Maempedia.ViewCells.NotificationListCell">
+    <ViewCell.View>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <ff:CachedImage x:Name="NotificationImage"
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="FillAndExpand"
+                            Aspect="AspectFill"
+                            CacheType="{x:Null}"
+                            DownsampleToViewSize="True"
+                            LoadingPlaceholder="menuplaceholder.png"
+                            ErrorPlaceholder="menuplaceholder.png"
+                            TransformPlaceholders="True"
+                            Margin="5">
+                <ff:CachedImage.Transformations>
+                    <fft:CornersTransformation TopLeftCornerSize="5"
+                                               TopRightCornerSize="5"
+                                               BottomLeftCornerSize="5"
+                                               BottomRightCornerSize="5"/>
+                </ff:CachedImage.Transformations>
+            </ff:CachedImage>
+            <StackLayout Grid.Column="1"
+                         VerticalOptions="StartAndExpand"
+                         HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding Title}"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="5,0"/>
+                <Label Text="{Binding Message}"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="StartAndExpand"
+                       FontSize="Small"
+                       FontAttributes="None"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="5,5"/>
+                <Label Text="{Binding TimeString}"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontSize="Micro"
+                       FontAttributes="None"
+                       TextColor="{StaticResource LightTextColor}"
+                       Margin="5,5"/>
+            </StackLayout>
+        </Grid>
+    </ViewCell.View>
+</ViewCell>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Login.LoginPage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    Padding="40,0">
+            <StackLayout>
+                <Label Text="Masuk ke Maempedia"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,20,0,40"/>
+                <Label Text="Username"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Entry x:Name="UsernameEntry"
+                       Text="{Binding UsernameText}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Fill"
+                       FontSize="Medium"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Completed="OnEntryCompleted"
+                       Margin="0,5"/>
+                <Label Text="Password"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Entry x:Name="PasswordEntry"
+                       Text="{Binding PasswordText}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Fill"
+                       FontSize="Medium"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       IsPassword="True"
+                       Completed="OnEntryCompleted"
+                       Margin="0,5,0,25"/>
+                <c:FlatButton Text="Masuk"
+                              Command="{Binding LoginCommand}"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Fill"
+                              FontSize="Medium"
+                              FontAttributes="Bold"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              Margin="10,5"/>
+                <c:FlatButton Text="Lupa Password?"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Center"
+                              FontSize="Small"
+                              TextColor="{StaticResource DarkTextColor}"
+                              BackgroundColor="{StaticResource DarkBackgroundColor}"
+                              BorderColor="{StaticResource DarkBackgroundColor}"
+                              BorderWidth="1"
+                              BorderRadius="30"
+                              Margin="0,5"
+                              Command="{Binding ForgotPasswordCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

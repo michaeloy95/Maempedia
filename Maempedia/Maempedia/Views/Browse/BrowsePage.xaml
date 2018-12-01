@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:vc="clr-namespace:Maempedia.ViewCells"
+             x:Class="Maempedia.Views.Browse.BrowsePage">
+    <ContentPage.Content>
+        <Grid VerticalOptions="Fill"
+              HorizontalOptions="Fill"
+              RowSpacing="0"
+              BackgroundColor="{StaticResource LightBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="90" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="90" />
+            </Grid.ColumnDefinitions>
+            <StackLayout x:Name="HeaderLayout"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         VerticalOptions="Fill"
+                         HorizontalOptions="Fill"
+                         BackgroundColor="{StaticResource Primary}"
+                         Padding="5">
+                <StackLayout VerticalOptions="Fill"
+                             HorizontalOptions="Fill"
+                             Orientation="Vertical">
+                    <!--<StackLayout x:Name="SearchBar"
+                                 VerticalOptions="Fill"
+                                 HorizontalOptions="Fill"
+                                 Orientation="Horizontal"
+                                 IsVisible="False"
+                                 Margin="0,5">
+                        <Image VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Center"
+                               HeightRequest="30"
+                               WidthRequest="30"
+                               Source="ic_back.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnHideSearchTap" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <c:SearchEntry x:Name="SearchEntry"
+                                       Text="{Binding SearchEntryText}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="Fill"
+                                       HeightRequest="50"
+                                       Placeholder="Coba &apos;Sate&apos;"
+                                       PlaceholderColor="{StaticResource LightTextColor}"
+                                       TextColor="{StaticResource DarkTextColor}"
+                                       BackgroundColor="{StaticResource LightBackgroundColor}"
+                                       SearchCommand="{Binding SearchCommand}"
+                                       IsVisible="True"
+                                       Margin="5" />
+                    </StackLayout>-->
+                    <StackLayout x:Name="SortBar"
+                                 VerticalOptions="Fill"
+                                 HorizontalOptions="Fill"
+                                 IsVisible="True">
+                        <StackLayout VerticalOptions="Fill"
+                                     HorizontalOptions="Fill"
+                                     Orientation="Horizontal">
+                            <Image HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HeightRequest="35"
+                                   WidthRequest="35"
+                                   Source="search.png">
+                                <Image.GestureRecognizers>
+                                    <!--<TapGestureRecognizer Tapped="OnSearchClicked" />-->
+                                    <TapGestureRecognizer Command="{Binding GotoSearchPageCommand}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="Maempedia"
+                                   VerticalOptions="Fill"
+                                   HorizontalOptions="CenterAndExpand"
+                                   HorizontalTextAlignment="Center"
+                                   FontSize="Large"
+                                   TextColor="{StaticResource ActiveColor}"/>
+                            <Image HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HeightRequest="35"
+                                   WidthRequest="35"
+                                   Source="ic_location.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMapClicked" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                        <Grid ColumnSpacing="10"
+                              Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <c:FlatButton x:Name="TerdekatButton"
+                                          Grid.Column="0"
+                                          VerticalOptions="Center"
+                                          Text="Terdekat"
+                                          TextColor="White"
+                                          FontSize="Small"
+                                          FontAttributes="None"
+                                          BorderColor="{StaticResource LightBorderColor}"
+                                          BorderWidth="1"
+                                          BackgroundColor="{StaticResource ActiveColor}"
+                                          Command="{Binding NearbyCommand}"
+                                          Clicked="OnSortTypeButtonClicked"/>
+                            <c:FlatButton x:Name="TrendingButton"
+                                          Grid.Column="1"
+                                          VerticalOptions="Center"
+                                          Text="Trending"
+                                          TextColor="{StaticResource MediumGrayTextColor}"
+                                          FontSize="Small"
+                                          FontAttributes="None"
+                                          BorderColor="{StaticResource LightBorderColor}"
+                                          BorderWidth="1"
+                                          BackgroundColor="{StaticResource Primary}"
+                                          Command="{Binding TrendingCommand}"
+                                          Clicked="OnSortTypeButtonClicked"/>
+                            <c:FlatButton x:Name="TerbaruButton"
+                                          Grid.Column="2"
+                                          VerticalOptions="Center"
+                                          Text="Terbaru"
+                                          TextColor="{StaticResource MediumGrayTextColor}"
+                                          FontSize="Small"
+                                          FontAttributes="None"
+                                          BorderColor="{StaticResource LightBorderColor}"
+                                          BorderWidth="1"
+                                          BackgroundColor="{StaticResource Primary}"
+                                          Command="{Binding LatestCommand}"
+                                          Clicked="OnSortTypeButtonClicked"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout x:Name="MenuListLayout"
+                         Grid.Row="0"
+                         Grid.RowSpan="3"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         TranslationY="100"
+                         BackgroundColor="{StaticResource LightBackgroundColor}">
+                <c:AdvancedListView x:Name="MenuListView"
+                                    ItemsSource="{Binding MenuList}"
+                                    ItemSelected="ListView_ItemSelected"
+                                    HasUnevenRows="True"
+                                    SeparatorVisibility="Default"
+                                    SeparatorColor="{StaticResource LightBorderColor}"
+                                    IsPullToRefreshEnabled="True"
+                                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                                    RefreshCommand="{Binding RefreshCommand}"
+                                    BackgroundColor="{StaticResource LightBackgroundColor}"
+                                    Margin="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <vc:MenuListCell/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <StackLayout VerticalOptions="Start"
+                                     HorizontalOptions="Fill"
+                                     IsVisible="{Binding IsLoadingMore}"
+                                     Padding="0,15">
+                            <ActivityIndicator HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               IsRunning="True"
+                                               WidthRequest="25"
+                                               HeightRequest="25"
+                                               Color="{StaticResource DarkTextColor}"/>
+                        </StackLayout>
+                    </ListView.Footer>
+                </c:AdvancedListView>
+            </StackLayout>
+            <Image x:Name="AddMenuImageButton"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HeightRequest="60"
+                   WidthRequest="60"
+                   Source="fab_menu.png"
+                   IsVisible="{Binding UserIsMaemseller}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAddMenuTap" />
+                </Image.GestureRecognizers>
+            </Image>
+            <!--<ff:CachedImage x:Name="OpenMapImageButton"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}"
+                            HeightRequest="60"
+                            WidthRequest="60"
+                            DownsampleToViewSize="True"
+                            Aspect="AspectFill"
+                            CacheType="{x:Null}"
+                            Source="fab_map.png">
+                <ff:CachedImage.Transformations>
+                    <fft:CircleTransformation />
+                </ff:CachedImage.Transformations>
+                <ff:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOpenMapTap" />
+                </ff:CachedImage.GestureRecognizers>
+            </ff:CachedImage>-->
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

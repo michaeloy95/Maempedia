@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Profile.UnloggedProfilePage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  RowSpacing="0"
+                  BackgroundColor="{StaticResource LightBackgroundColor}"
+                  Padding="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="StartAndExpand"
+                             Padding="10,0"
+                             Spacing="0">
+                    <Label Text="Bergabung"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Start"
+                           FontAttributes="Bold"
+                           FontSize="48"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0">
+                    </Label>
+                    <Label Text="dengan"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Start"
+                           FontAttributes="Bold"
+                           FontSize="48"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0">
+                    </Label>
+                    <Label Text="Maempedia"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Start"
+                           FontAttributes="Bold"
+                           FontSize="48"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0">
+                    </Label>
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand">
+                    <c:FlatButton Text="Bergabung"
+                                  VerticalOptions="Start"
+                                  HorizontalOptions="Fill"
+                                  FontSize="Medium"
+                                  TextColor="White"
+                                  FontAttributes="Bold"
+                                  BackgroundColor="{StaticResource ActiveColor}"
+                                  BorderRadius="30"
+                                  Margin="30,5"
+                                  Command="{Binding RegisterCommand}"/>
+                    <StackLayout Orientation="Horizontal"
+                                 Padding="5">
+                        <Label Text="Sudah memiliki akun?"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="EndAndExpand"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Small"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="0,5"/>
+                        <c:FlatButton Text="Masuk Sekarang"
+                                      VerticalOptions="Start"
+                                      HorizontalOptions="StartAndExpand"
+                                      FontSize="Small"
+                                      FontAttributes="Bold"
+                                      TextColor="{StaticResource DarkTextColor}"
+                                      BackgroundColor="{StaticResource LightBackgroundColor}"
+                                      BorderColor="{StaticResource LightBackgroundColor}"
+                                      BorderWidth="1"
+                                      BorderRadius="30"
+                                      Margin="-3,5"
+                                      Command="{Binding LoginCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

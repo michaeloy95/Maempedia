@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:vc="clr-namespace:Maempedia.ViewCells"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Maempedia.Views.Menu.MenuListingPage"
+             Title="Daftar Menu">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="plus.png" Command="{Binding AddMenuCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource LightBackgroundColor}">
+            <ListView x:Name="MenuListView"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      ItemsSource="{Binding MenuList}"
+                      ItemSelected="ListView_ItemSelected"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      CachingStrategy="RecycleElement"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True"
+                      BackgroundColor="{StaticResource LightBackgroundColor}"
+                      Margin="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <vc:MyMenuListCell/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout Padding="20">
+                        <c:FlatButton Text="Tambah Menu +"
+                                      VerticalOptions="Start"
+                                      HorizontalOptions="Center"
+                                      FontSize="Small"
+                                      TextColor="White"
+                                      BackgroundColor="{StaticResource ActiveColor}"
+                                      BorderRadius="30"
+                                      Command="{Binding AddMenuCommand}"
+                                      IsVisible="{Binding HasMenu}"
+                                      Margin="0,5"/>
+                        <StackLayout Padding="0,15"
+                                     IsVisible="{Binding HasNoMenu}">
+                            <Label Text="Belum ada menu yang terunggah"
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Center"
+                                   FontSize="Small"
+                                   TextColor="{StaticResource MediumGrayTextColor}"
+                                   Margin="20"/>
+                            <c:FlatButton Text="Unggah Menu"
+                                          VerticalOptions="Start"
+                                          HorizontalOptions="Center"
+                                          FontSize="Small"
+                                          TextColor="White"
+                                          BackgroundColor="{StaticResource ActiveColor}"
+                                          BorderRadius="30"
+                                          Command="{Binding AddMenuCommand}"
+                                          Margin="0,5"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             xmlns:vc="clr-namespace:Maempedia.ViewCells"
+             x:Class="Maempedia.Views.Menu.CommentPage"
+             Title="Komentar">
+    <ContentPage.Content>
+        <Grid VerticalOptions="Fill"
+              HorizontalOptions="Fill"
+              BackgroundColor="{StaticResource LightBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="CommentsListView"
+                      Grid.Row="0"
+                      Grid.RowSpan="2"
+                      ItemsSource="{Binding CommentList}"
+                      SelectionMode="None"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      IsPullToRefreshEnabled="True"
+                      ItemAppearing="CommentsListView_ItemAppearing"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      BackgroundColor="{StaticResource LightBackgroundColor}"
+                      Margin="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <vc:CommentCell/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Header>
+                    <StackLayout HeightRequest="10"/>
+                </ListView.Header>
+                <ListView.Footer>
+                    <StackLayout>
+                        <StackLayout IsVisible="{Binding IsLoadingMore}"
+                                     Padding="0">
+                            <ActivityIndicator HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               IsRunning="{Binding IsLoadingMore}"
+                                               WidthRequest="25"
+                                               HeightRequest="25"
+                                               Color="{StaticResource DarkTextColor}"
+                                               Margin="15"/>
+                            <StackLayout.Triggers>
+                                <Trigger TargetType="StackLayout" Property="IsVisible" Value="False">
+                                    <Setter Property="HeightRequest" Value="0" />
+                                    <Setter Property="Padding" Value="0" />
+                                </Trigger>
+                                <Trigger TargetType="StackLayout" Property="IsVisible" Value="True">
+                                    <Setter Property="HeightRequest" Value="60" />
+                                    <Setter Property="Padding" Value="0" />
+                                </Trigger>
+                            </StackLayout.Triggers>
+                        </StackLayout>
+                        <StackLayout HeightRequest="80"/>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+            <StackLayout Grid.Row="1"
+                         Margin="0"
+                         Padding="0"
+                         BackgroundColor="{StaticResource LightBackgroundColor}">
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightBorderColor}"
+                         HeightRequest="1"
+                         Margin="0"/>
+                <StackLayout Orientation="Horizontal"
+                             IsVisible="{Binding IsLoggedIn}"
+                             Padding="20,5">
+                    <ff:CachedImage Source="{Binding ProfilePictureThumb}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="40"
+                                    HeightRequest="40"
+                                    Aspect="AspectFit"
+                                    DownsampleToViewSize="True"
+                                    LoadingPlaceholder="profilepictureplaceholder.png"
+                                    ErrorPlaceholder="profilepictureplaceholder.png"
+                                    TransformPlaceholders="False"
+                                    Margin="3,0">
+                        <ff:CachedImage.Transformations>
+                            <fft:CircleTransformation />
+                        </ff:CachedImage.Transformations>
+                    </ff:CachedImage>
+                    <Entry Text="{Binding CommentText, Mode=TwoWay}"
+                           Placeholder="Berikan komentar..."
+                           VerticalOptions="Center"
+                           HorizontalOptions="FillAndExpand"
+                           FontSize="Small"
+                           TextColor="{StaticResource DarkTextColor}"
+                           PlaceholderColor="{StaticResource MediumGrayTextColor}"
+                           ReturnCommand="{Binding PostCommentCommand}"
+                           TextChanged="CommentEntry_TextChanged"
+                           Margin="0,3"/>
+                    <Label Text="Kirim"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           FontSize="Small"
+                           TextColor="{StaticResource ActiveColor}"
+                           Margin="0,3"
+                           IsVisible="{Binding CanPostComment, Mode=OneWay}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PostCommentCommand}"
+                                                  Tapped="PostButton_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <c:FlatButton Text="Masuk untuk memberi komentar"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Center"
+                              FontSize="Small"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderColor="{StaticResource ActiveColor}"
+                              BorderWidth="1"
+                              BorderRadius="30"
+                              Margin="0,5,0,10"
+                              Command="{Binding GotoProfileCommand}"
+                              IsVisible="{Binding IsNotLoggedIn}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Profile.EditContactPage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         Orientation="Vertical"
+                         Padding="20,10">
+                <Label Text="No Telepon"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <Entry x:Name="ContactEntry"
+                       Text="{Binding ContactText}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Fill"
+                       FontSize="Medium"
+                       Keyboard="Telephone"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,5"/>
+                <Label Text="No WhatsApp"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name="WAContactEntry"
+                           Text="{Binding WAContactText}"
+                           VerticalOptions="Start"
+                           HorizontalOptions="FillAndExpand"
+                           FontSize="Medium"
+                           Keyboard="Telephone"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           Focused="OnEntryFocused"
+                           Unfocused="OnWAContactEntryUnfocused"
+                           Completed="OnEntryCompleted"
+                           Margin="0,5"/>
+                    <ActivityIndicator VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       WidthRequest="22"
+                                       HeightRequest="22"
+                                       IsRunning="True"
+                                       Color="{StaticResource ActiveColor}"
+                                       IsVisible="{Binding WAContactIsChecking}"
+                                       Margin="3,0"/>
+                    <Image VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           WidthRequest="22"
+                           HeightRequest="22"
+                           Source="check.png"
+                           IsVisible="{Binding WAContactIsValid}"
+                           Margin="3,0"/>
+                </StackLayout>
+                <Label Text="Email"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name="EmailEntry"
+                           Text="{Binding EmailText}"
+                           VerticalOptions="Start"
+                           HorizontalOptions="FillAndExpand"
+                           FontSize="Medium"
+                           Keyboard="Email"
+                           TextColor="{StaticResource MediumGrayTextColor}"
+                           Focused="OnEntryFocused"
+                           Unfocused="OnEmailEntryUnfocused"
+                           Completed="OnEntryCompleted"
+                           Margin="0,5"/>
+                    <ActivityIndicator VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       WidthRequest="22"
+                                       HeightRequest="22"
+                                       IsRunning="True"
+                                       Color="{StaticResource ActiveColor}"
+                                       IsVisible="{Binding EmailIsChecking}"
+                                       Margin="3,0"/>
+                    <Image VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           WidthRequest="22"
+                           HeightRequest="22"
+                           Source="check.png"
+                           IsVisible="{Binding EmailIsValid}"
+                           Margin="3,0"/>
+                </StackLayout>
+                <c:FlatButton Text="Simpan"
+                              VerticalOptions="Start"
+                              HorizontalOptions="End"
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              Margin="0,5"
+                              IsEnabled="{Binding SaveCommandEnabled, Mode=TwoWay}"
+                              Command="{Binding SaveCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

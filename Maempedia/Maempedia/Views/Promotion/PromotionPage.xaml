@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Promotion.PromotionPage"
+             Title="Menu Premium">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{StaticResource LightBackgroundColor}">
+            <StackLayout VerticalOptions="Fill"
+                         HorizontalOptions="Fill"
+                         Orientation="Vertical"
+                         Padding="30,10">
+                <Label Text="Menu yang dipromosikan akan lebih efektif terlihat oleh para pengguna. Menu anda akan muncul di urutan teratas dan akan memiliki banner yang menonjolkan menu anda dari yang lain."
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       FontAttributes="None"
+                       FontSize="Small"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,2" />
+                <Label Text="Promosikan Menu Anda Sekarang!"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,5"/>
+                <Frame VerticalOptions="Start"
+                       HorizontalOptions="Fill"
+                       CornerRadius="15"
+                       Margin="0,5">
+                    <Grid VerticalOptions="Fill"
+                          HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               WidthRequest="22"
+                               HeightRequest="22"
+                               Source="check.png"
+                               IsVisible="{Binding Check10Visible}"
+                               Margin="15,0"/>
+                        <Label Grid.Column="1"
+                               Text="10 hari ~ Rp. 30.000"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Center"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="0,5"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Option1Callback}" />
+                            <ClickGestureRecognizer Command="{Binding Option1Callback}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Frame>
+                <Frame VerticalOptions="Start"
+                       HorizontalOptions="Fill"
+                       CornerRadius="15"
+                       Margin="0,5">
+                    <Grid VerticalOptions="Fill"
+                          HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               WidthRequest="22"
+                               HeightRequest="22"
+                               Source="check.png"
+                               IsVisible="{Binding Check30Visible}"
+                               Margin="15,0"/>
+                        <Label Grid.Column="1"
+                               Text="30 hari ~ Rp. 60.000"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Center"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="0,5"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Option2Callback}" />
+                            <ClickGestureRecognizer Command="{Binding Option2Callback}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Frame>
+                <Frame VerticalOptions="Start"
+                       HorizontalOptions="Fill"
+                       CornerRadius="15"
+                       Margin="0,5">
+                    <Grid VerticalOptions="Fill"
+                          HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               WidthRequest="22"
+                               HeightRequest="22"
+                               Source="check.png"
+                               IsVisible="{Binding Check60Visible}"
+                               Margin="15,0"/>
+                        <Label Grid.Column="1"
+                               Text="60 hari ~ Rp. 100.000"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Center"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="0,5"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Option3Callback}" />
+                            <ClickGestureRecognizer Command="{Binding Option3Callback}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Frame>
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightTextColor}"
+                         HeightRequest="1"
+                         Margin="0,15"/>
+                <Label Text="TOTAL"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,5"/>
+                <Label Text="{Binding PriceString}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       TextColor="#BADC58"
+                       Margin="10,5"/>
+                <BoxView VerticalOptions="Center"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource LightTextColor}"
+                         HeightRequest="1"
+                         Margin="0,15"/>
+                <c:FlatButton Text="Lanjut ke Pembayaran"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Fill"
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              Margin="0,5"
+                              IsEnabled="{Binding NextIsValid}"
+                              Command="{Binding NextCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

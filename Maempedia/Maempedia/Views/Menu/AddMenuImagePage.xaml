@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:c="clr-namespace:Maempedia.Custom"
+             x:Class="Maempedia.Views.Menu.AddMenuImagePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="20,10">
+                <Label Text="Unggah foto menu kuliner"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0,10">
+                </Label>
+                <Label Text="Foto menu kuliner dengan gambar yang jelas dan berkualitas akan memiliki daya tarik yang lebih tinggi."
+                       VerticalOptions="Start" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Start"
+                       FontSize="Small"
+                       FontAttributes="None"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0,5"/>
+                <ff:CachedImage x:Name="profileImage"
+                                Source="{Binding ImageSource}"
+                                VerticalOptions="Start" 
+                                HorizontalOptions="CenterAndExpand"
+                                WidthRequest="{Binding ImageWidth}"
+                                ErrorPlaceholder="menuplaceholder.png"
+                                LoadingPlaceholder="menuplaceholder.png"
+                                DownsampleToViewSize="True"
+                                Success="CachedImage_Success"
+                                Aspect="AspectFit"
+                                CacheType="{x:Null}"
+                                Margin="55,5" />
+                <c:FlatButton Text="Pilih Foto"
+                              VerticalOptions="Start"
+                              HorizontalOptions="Center"
+                              FontSize="Medium"
+                              TextColor="{StaticResource MediumGrayTextColor}"
+                              BorderColor="{StaticResource MediumGrayTextColor}"
+                              BorderWidth="1"
+                              BackgroundColor="{StaticResource Primary}"
+                              Margin="0,5"
+                              Command="{Binding UploadCommand}"/>
+                <c:FlatButton x:Name="NextButton"
+                              Text="Selanjutnya"
+                              VerticalOptions="Start"
+                              HorizontalOptions="End"
+                              FontSize="Medium"
+                              TextColor="White"
+                              BackgroundColor="{StaticResource ActiveColor}"
+                              BorderRadius="30"
+                              IsEnabled="{Binding NextCommandEnabled, Mode=TwoWay}"
+                              Margin="0,10"
+                              Command="{Binding NextCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
