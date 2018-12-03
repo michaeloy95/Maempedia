@@ -71,6 +71,7 @@
                                 Aspect="AspectFill"
                                 CacheType="{x:Null}"
                                 DownsampleToViewSize="True"
+                                Success="MenuImage_Success"
                                 LoadingPlaceholder="menuplaceholder.png"
                                 ErrorPlaceholder="menuplaceholder.png"
                                 Margin="0"/>
