@@ -1,4 +1,5 @@
-﻿using Maempedia.Interfaces;
+﻿using FFImageLoading.Forms;
+using Maempedia.Interfaces;
 using Maempedia.Models;
 using Maempedia.ViewModels.Menu;
 using System;
@@ -131,6 +132,17 @@ namespace Maempedia.Views.Menu
             {
                 this.ViewModel.CheckComment();
             }
+        }
+
+        private void MenuImage_Success(object sender, CachedImageEvents.SuccessEventArgs e)
+        {
+            var info = e.ImageInformation;
+            if (info == null)
+            {
+                return;
+            }
+
+            this.MenuImage.HeightRequest = this.MenuImage.WidthRequest * ((double)info.OriginalHeight / (double)info.OriginalWidth);
         }
     }
 }

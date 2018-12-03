@@ -8,6 +8,7 @@
                      HorizontalOptions="Start"
                      Padding="10,10">
             <ff:CachedImage Source="{Binding ImageSource}"
+                            x:Name="MenuImage"
                             VerticalOptions="Start"
                             HorizontalOptions="Center"
                             Aspect="AspectFit"
@@ -15,7 +16,7 @@
                             DownsampleWidth="150"
                             LoadingPlaceholder="menuplaceholder.png"
                             ErrorPlaceholder="menuplaceholder.png"
-                            Success="CachedImage_Success"
+                            Success="MenuImage_Success"
                             Margin="5"/>
             <StackLayout x:Name="DetailsLayout"
                          VerticalOptions="Start"

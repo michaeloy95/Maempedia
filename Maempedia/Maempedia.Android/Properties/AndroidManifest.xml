@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="maempedia.com" android:installLocation="auto" android:versionName="5.4.107" android:versionCode="1575254107">
-	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="27" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="maempedia.com" android:installLocation="auto" android:versionName="5.5.0" android:versionCode="2000505000">
+	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

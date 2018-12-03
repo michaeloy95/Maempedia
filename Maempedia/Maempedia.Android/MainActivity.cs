@@ -3,7 +3,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Util;
-using FFImageLoading.Forms.Droid;
+using FFImageLoading.Forms.Platform;
 using Plugin.Permissions;
 
 namespace Maempedia.Droid
@@ -25,7 +25,7 @@ namespace Maempedia.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsGoogleMaps.Init(this, bundle);
-            CachedImageRenderer.Init();
+            CachedImageRenderer.Init(true);
 
             this.OverridePendingTransition(Resource.Animation.design_snackbar_in, Resource.Animation.design_snackbar_out);
 

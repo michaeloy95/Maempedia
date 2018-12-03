@@ -110,5 +110,16 @@ namespace Maempedia.ViewCells
             string url = $"https://api.whatsapp.com/send?phone={menu.Owner.ContactWA}&text={text}";
             Device.OpenUri(new Uri(url));
         }
+
+        private void MenuImage_Success(object sender, FFImageLoading.Forms.CachedImageEvents.SuccessEventArgs e)
+        {
+            var info = e.ImageInformation;
+            if (info == null)
+            {
+                return;
+            }
+
+            this.MenuImage.HeightRequest = this.MenuImage.WidthRequest * ((double)info.OriginalHeight / (double)info.OriginalWidth);
+        }
     }
 }

@@ -12,10 +12,11 @@ namespace Maempedia.ViewCells
             InitializeComponent();
         }
 
-        private void CachedImage_Success(object sender, CachedImageEvents.SuccessEventArgs e)
+        private void MenuImage_Success(object sender, CachedImageEvents.SuccessEventArgs e)
         {
             var info = e.ImageInformation;
-            this.DetailsLayout.WidthRequest = info.CurrentWidth;
+
+            this.MenuImage.WidthRequest = this.MenuImage.HeightRequest * ((double)info.OriginalWidth / (double)info.OriginalHeight);
             
             this.MenuHeadlineText.Text = this.MenuHeadlineHelperText.Text.Length < 50 ? this.MenuHeadlineHelperText.Text
                            : this.MenuHeadlineHelperText.Text.Substring(0, 50).Trim() + "...";
