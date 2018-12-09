@@ -67,6 +67,7 @@
                                             DownsampleToViewSize="True"
                                             LoadingPlaceholder="menuplaceholder.png"
                                             ErrorPlaceholder="menuplaceholder.png"
+                                            Success="MenuImage_Success"
                                             Margin="0"/>
                         </Frame>
 
