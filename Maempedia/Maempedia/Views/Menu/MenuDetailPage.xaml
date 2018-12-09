@@ -58,7 +58,8 @@
                                Grid.Row="0"
                                OutlineColor="{StaticResource DarkBackgroundColor}"
                                Padding="0">
-                            <ff:CachedImage Source="{Binding SelectedMenu.ImageSource}"
+                            <ff:CachedImage x:Name="MenuImage"
+                                            Source="{Binding SelectedMenu.ImageSource}"
                                             HorizontalOptions="Fill"
                                             WidthRequest="{Binding MenuImageWidth}"
                                             Aspect="AspectFill"
