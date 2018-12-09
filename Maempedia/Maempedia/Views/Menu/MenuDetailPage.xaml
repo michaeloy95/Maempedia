@@ -16,28 +16,49 @@
         <ScrollView InputTransparent="True"
                     BackgroundColor="{StaticResource LightBackgroundColor}">
             <ListView x:Name="CommentsListView"
-                        HorizontalOptions="FillAndExpand"
-                        SeparatorVisibility="None"
-                        HasUnevenRows="True"
-                        ItemsSource="{Binding CommentList}"
-                        RefreshCommand="{Binding RefreshPage}"
-                        SelectionMode="None"
-                        BackgroundColor="{StaticResource LightBackgroundColor}"
-                        Margin="0">
+                      HorizontalOptions="FillAndExpand"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding CommentList}"
+                      RefreshCommand="{Binding RefreshPage}"
+                      SelectionMode="None"
+                      BackgroundColor="{StaticResource LightBackgroundColor}"
+                      Margin="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <vc:CommentCell/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.Header>
-                    <StackLayout HorizontalOptions="FillAndExpand"
-                                    Orientation="Vertical">
-                        <Frame HorizontalOptions="FillAndExpand"
-                                VerticalOptions="Start"
-                                OutlineColor="{StaticResource DarkBackgroundColor}"
-                                Padding="0">
-                            <ff:CachedImage x:Name="MenuImage"
-                                            Source="{Binding SelectedMenu.ImageSource}"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="115"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="150"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="31"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Frame Grid.ColumnSpan="2"
+                               Grid.Row="0"
+                               OutlineColor="{StaticResource DarkBackgroundColor}"
+                               Padding="0">
+                            <ff:CachedImage Source="{Binding SelectedMenu.ImageSource}"
                                             HorizontalOptions="Fill"
                                             WidthRequest="{Binding MenuImageWidth}"
                                             Aspect="AspectFill"
@@ -45,274 +66,272 @@
                                             DownsampleToViewSize="True"
                                             LoadingPlaceholder="menuplaceholder.png"
                                             ErrorPlaceholder="menuplaceholder.png"
-                                            Success="MenuImage_Success"
                                             Margin="0"/>
                         </Frame>
-                        <StackLayout HorizontalOptions="FillAndExpand"
-                                        VerticalOptions="Start"
-                                        Orientation="Vertical"
-                                        Padding="15,7,15,25">
-                            <Label Text="{Binding SelectedMenu.Name}"
-                                    HorizontalOptions="StartAndExpand"
-                                    VerticalOptions="Center"
-                                    FontSize="Large"
-                                    FontAttributes="Bold"
-                                    TextColor="{StaticResource DarkTextColor}"
-                                    Margin="5"/>
-                            <StackLayout HorizontalOptions="FillAndExpand"
-                                            VerticalOptions="Start"
-                                            Orientation="Horizontal"
-                                            Padding="5">
-                                <Image x:Name="LikeImage"
-                                        Source="heart_blank.png"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Center"
-                                        WidthRequest="30"
-                                        Margin="0">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnLikeImageTapped"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
-                                <Label Text="{Binding SelectedMenu.Like}"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Center"
-                                        FontSize="Small"
-                                        FontAttributes="Bold"
-                                        TextColor="{StaticResource DarkTextColor}"
-                                        Margin="5,0"/>
-                            </StackLayout>
-                            <Label Text="{Binding SelectedMenu.PriceString}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Start"
-                                    FontSize="Small"
-                                    FontAttributes="Bold"
-                                    TextColor="{StaticResource DarkTextColor}"
-                                    Margin="5,0"/>
-                            <Label Text="{Binding SelectedMenu.Headline}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Start"
-                                    FontSize="Small"
-                                    FontAttributes="None"
-                                    TextColor="{StaticResource MediumGrayTextColor}"
-                                    Margin="5,0"/>
+
+                        <Label Text="{Binding SelectedMenu.Name}"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="1"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="20,5"/>
+
+                        <StackLayout Grid.ColumnSpan="2"
+                                     Grid.Row="2"
+                                     Orientation="Horizontal"
+                                     Padding="20,5">
+                            <Image x:Name="LikeImage"
+                                   Source="heart_blank.png"
+                                   VerticalOptions="Center"
+                                   WidthRequest="30"
+                                   Margin="0">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnLikeImageTapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="{Binding SelectedMenu.Like}"
+                                   VerticalOptions="Center"
+                                   FontSize="Small"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource DarkTextColor}"
+                                   Margin="5,0"/>
                         </StackLayout>
-                        <BoxView VerticalOptions="Center"
-                                    HorizontalOptions="FillAndExpand"
-                                    BackgroundColor="{StaticResource LightBorderColor}"
-                                    HeightRequest="1"
-                                    Margin="20,5"/>
-                        <StackLayout VerticalOptions="Start"
-                                        HorizontalOptions="FillAndExpand"
-                                        Padding="0,5">
-                            <StackLayout Orientation="Vertical">
-                                <StackLayout Orientation="Horizontal"
-                                                Padding="15,10">
-                                    <StackLayout HorizontalOptions="StartAndExpand" 
-                                                    Orientation="Vertical">
-                                        <Label Text="{Binding SelectedMenu.Owner.Name}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Start"
-                                                FontSize="Medium"
-                                                FontAttributes="Bold"
-                                                TextColor="{StaticResource DarkTextColor}"
-                                                Margin="5,0"/>
-                                        <StackLayout VerticalOptions="Start"
-                                                        HorizontalOptions="Start"
-                                                        Orientation="Horizontal"
-                                                        Margin="3,0">
-                                            <Image Source="ic_call.png"
-                                                    VerticalOptions="Start"
-                                                    HorizontalOptions="Start"
-                                                    WidthRequest="25"
-                                                    HeightRequest="25"
-                                                    Margin="3,0"/>
-                                            <Label Text="{Binding SelectedMenu.Owner.ContactNumber}"
-                                                    HorizontalOptions="Start"
-                                                    VerticalOptions="Center"
-                                                    FontSize="Small"
-                                                    FontAttributes="Bold"
-                                                    TextColor="{StaticResource DarkTextColor}"
-                                                    Margin="5,0"/>
-                                        </StackLayout>
-                                        <StackLayout VerticalOptions="Start"
-                                                        HorizontalOptions="Start"
-                                                        Orientation="Horizontal"
-                                                        Margin="3,0">
-                                            <Image Source="ic_email.png"
-                                                    VerticalOptions="Start"
-                                                    HorizontalOptions="Start"
-                                                    WidthRequest="25"
-                                                    HeightRequest="25"
-                                                    Margin="3,0"/>
-                                            <Label Text="{Binding SelectedMenu.Owner.Email}"
-                                                    HorizontalOptions="Start"
-                                                    VerticalOptions="Center"
-                                                    FontSize="Small"
-                                                    FontAttributes="Bold"
-                                                    TextColor="{StaticResource DarkTextColor}"
-                                                    Margin="5,0"/>
-                                        </StackLayout>
-                                        <StackLayout VerticalOptions="Start"
-                                                        HorizontalOptions="Start"
-                                                        Orientation="Horizontal"
-                                                        Margin="3,0">
-                                            <Image Source="ic_time.png"
-                                                    VerticalOptions="Start"
-                                                    HorizontalOptions="Start"
-                                                    WidthRequest="25"
-                                                    HeightRequest="25"
-                                                    Margin="3,0"/>
-                                            <Label Text="{Binding WorkingHours}"
-                                                    HorizontalOptions="Start"
-                                                    VerticalOptions="Center"
-                                                    FontSize="Small"
-                                                    FontAttributes="Bold"
-                                                    TextColor="{StaticResource DarkTextColor}"
-                                                    Margin="5,0"/>
-                                        </StackLayout>
-                                        <Label Text="{Binding SelectedMenu.Owner.Headline}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Start"
-                                                FontSize="Small"
-                                                FontAttributes="None"
-                                                TextColor="{StaticResource DarkTextColor}"
-                                                Margin="5,3"/>
-                                    </StackLayout>
-                                    <ff:CachedImage Source="{Binding SelectedMenu.Owner.ProfilePicture}"
-                                                    HorizontalOptions="End"
-                                                    VerticalOptions="Start"
-                                                    WidthRequest="75"
-                                                    HeightRequest="75"
-                                                    Aspect="AspectFit"
-                                                    CacheType="{x:Null}"
-                                                    DownsampleToViewSize="True"
-                                                    LoadingPlaceholder="profilepictureplaceholder.png"
-                                                    ErrorPlaceholder="profilepictureplaceholder.png"
-                                                    Margin="5" >
-                                        <ff:CachedImage.Transformations>
-                                            <fft:CircleTransformation />
-                                        </ff:CachedImage.Transformations>
-                                        <ff:CachedImage.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnOwnerTap" />
-                                        </ff:CachedImage.GestureRecognizers>
-                                    </ff:CachedImage>
-                                </StackLayout>
-                                <gm:Map x:Name="MyMap"
-                                        InitialCameraUpdate="-7.25, 112.75, 17, 0, 0"
-                                        VerticalOptions="Start"
-                                        HorizontalOptions="Fill"
-                                        HeightRequest="150"
-                                        IsShowingUser="False"
-                                        IsTrafficEnabled="False"
-                                        IsIndoorEnabled="False"
-                                        MapType="Street"
-                                        MapClicked="OnMapClicked"
-                                        HasZoomEnabled="False"/>
-                                <Label Text="{Binding SelectedMenu.Owner.Location.Address}"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Start"
-                                        FontSize="Small"
-                                        FontAttributes="Italic"
-                                        TextColor="{StaticResource DarkTextColor}"
-                                        Margin="20,5"/>
-                            </StackLayout>
-                            <BoxView VerticalOptions="Center"
-                                        HorizontalOptions="FillAndExpand"
-                                        BackgroundColor="{StaticResource LightBorderColor}"
-                                        HeightRequest="1"
-                                        Margin="20,15"/>
-                            <StackLayout Orientation="Vertical"
-                                            Padding="15,5">
-                                <Label Text="Komentar"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Start"
-                                        FontSize="Medium"
-                                        FontAttributes="Bold"
-                                        TextColor="{StaticResource DarkTextColor}"
-                                        Margin="5"/>
-                                <Label Text="Tidak ada komentar."
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Start"
-                                        FontSize="Small"
-                                        FontAttributes="None"
-                                        TextColor="{StaticResource MediumGrayTextColor}"
-                                        IsVisible="{Binding NoComments}"
-                                        Margin="5"/>
-                            </StackLayout>
+
+                        <Label Text="{Binding SelectedMenu.PriceString}"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="3"
+                               FontSize="Small"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="20,0"/>
+
+                        <Label Text="{Binding SelectedMenu.Headline}"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="4"
+                               FontSize="Small"
+                               FontAttributes="None"
+                               TextColor="{StaticResource MediumGrayTextColor}"
+                               Margin="20,0"/>
+
+                        <BoxView Grid.ColumnSpan="2"
+                                 Grid.Row="5"
+                                 VerticalOptions="Center"
+                                 BackgroundColor="{StaticResource LightBorderColor}"
+                                 HeightRequest="1"
+                                 Margin="20,0"/>
+
+                        <Label Text="{Binding SelectedMenu.Owner.Name}"
+                               Grid.Row="6"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="20,5"/>
+
+                        <StackLayout Grid.Row="7"
+                                     Orientation="Horizontal"
+                                     Margin="20,0">
+                            <Image Source="ic_call.png"
+                                   WidthRequest="25"
+                                   HeightRequest="25"
+                                   Margin="3,0"/>
+                            <Label Text="{Binding SelectedMenu.Owner.ContactNumber}"
+                                   VerticalOptions="Center"
+                                   FontSize="Small"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource DarkTextColor}"
+                                   Margin="5,0"/>
                         </StackLayout>
-                    </StackLayout>
+
+                        <StackLayout Grid.Row="8"
+                                     Orientation="Horizontal"
+                                     Margin="20,0">
+                            <Image Source="ic_email.png"
+                                   WidthRequest="25"
+                                   HeightRequest="25"
+                                   Margin="3,0"/>
+                            <Label Text="{Binding SelectedMenu.Owner.Email}"
+                                   VerticalOptions="Center"
+                                   FontSize="Small"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource DarkTextColor}"
+                                   Margin="5,0"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="9"
+                                     Orientation="Horizontal"
+                                     Margin="20,0">
+                            <Image Source="ic_time.png"
+                                   WidthRequest="25"
+                                   HeightRequest="25"
+                                   Margin="3,0"/>
+                            <Label Text="{Binding WorkingHours}"
+                                   VerticalOptions="Center"
+                                   FontSize="Small"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource DarkTextColor}"
+                                   Margin="5,0"/>
+                        </StackLayout>
+
+                        <ff:CachedImage Source="{Binding SelectedMenu.Owner.ProfilePicture}"
+                                        Grid.Column="1"
+                                        Grid.Row="6"
+                                        Grid.RowSpan="4"
+                                        VerticalOptions="Start"
+                                        WidthRequest="75"
+                                        HeightRequest="75"
+                                        Aspect="AspectFit"
+                                        CacheType="{x:Null}"
+                                        DownsampleToViewSize="True"
+                                        LoadingPlaceholder="profilepictureplaceholder.png"
+                                        ErrorPlaceholder="profilepictureplaceholder.png"
+                                        Margin="20,5">
+                            <ff:CachedImage.Transformations>
+                                <fft:CircleTransformation />
+                            </ff:CachedImage.Transformations>
+                            <ff:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnOwnerTap" />
+                            </ff:CachedImage.GestureRecognizers>
+                        </ff:CachedImage>
+
+                        <Label Grid.ColumnSpan="2"
+                               Grid.Row="10"
+                               Text="{Binding SelectedMenu.Owner.Headline}"
+                               FontSize="Small"
+                               FontAttributes="None"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="20,5"/>
+
+                        <gm:Map x:Name="MyMap"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="11"
+                                InitialCameraUpdate="-7.25, 112.75, 17, 0, 0"
+                                HeightRequest="150"
+                                IsShowingUser="False"
+                                IsTrafficEnabled="False"
+                                IsIndoorEnabled="False"
+                                MapType="Street"
+                                MapClicked="OnMapClicked"
+                                HasZoomEnabled="False"
+                                Margin="0,5"/>
+
+                        <Label Text="{Binding SelectedMenu.Owner.Location.Address}"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="12"
+                               FontSize="Small"
+                               FontAttributes="Italic"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="20,3"/>
+
+                        <BoxView Grid.ColumnSpan="2"
+                                 Grid.Row="13"
+                                 VerticalOptions="Center"
+                                 BackgroundColor="{StaticResource LightBorderColor}"
+                                 HeightRequest="1"
+                                 Margin="20,0"/>
+
+                        <Label Text="Komentar"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="14"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="20,5"/>
+                        
+                        <Label Text="Tidak ada komentar."
+                               Grid.ColumnSpan="2"
+                               Grid.Row="15"
+                               FontSize="Small"
+                               FontAttributes="None"
+                               TextColor="{StaticResource MediumGrayTextColor}"
+                               IsVisible="{Binding NoComments}"
+                               Margin="20,5"/>
+                    </Grid>
                 </ListView.Header>
                 <ListView.Footer>
-                    <StackLayout HorizontalOptions="Fill"
-                                    VerticalOptions="Start"
-                                    Orientation="Vertical"
-                                    Margin="20,5,20,20">
+                    <Grid Margin="20,5,20,20"
+                          HeightRequest="135">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
                         <Label Text="{Binding ViewCommentsText}"
-                                HorizontalOptions="Start"
-                                VerticalOptions="Start"
-                                FontSize="Small"
-                                FontAttributes="None"
-                                TextColor="{StaticResource MediumGrayTextColor}"
-                                IsVisible="{Binding ShowViewComments}"
-                                Margin="5,15,5,25">
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Grid.Row="0"
+                               FontSize="Small"
+                               FontAttributes="None"
+                               TextColor="{StaticResource MediumGrayTextColor}"
+                               IsVisible="{Binding ShowViewComments}"
+                               Margin="5,15,5,25">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ViewCommentsCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        <StackLayout HorizontalOptions="Fill"
-                                        VerticalOptions="Start"
-                                        Orientation="Horizontal"
+
+                        <ff:CachedImage Source="{Binding ProfilePictureThumb}"
+                                        Grid.Column="0"
+                                        Grid.Row="1"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        Aspect="AspectFit"
+                                        DownsampleToViewSize="True"
+                                        LoadingPlaceholder="profilepictureplaceholder.png"
+                                        ErrorPlaceholder="profilepictureplaceholder.png"
+                                        TransformPlaceholders="False"
                                         IsVisible="{Binding IsLoggedIn}">
-                            <ff:CachedImage Source="{Binding ProfilePictureThumb}"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Start"
-                                            WidthRequest="40"
-                                            HeightRequest="40"
-                                            Aspect="AspectFit"
-                                            DownsampleToViewSize="True"
-                                            LoadingPlaceholder="profilepictureplaceholder.png"
-                                            ErrorPlaceholder="profilepictureplaceholder.png"
-                                            TransformPlaceholders="False"
-                                            Margin="3,0">
-                                <ff:CachedImage.Transformations>
-                                    <fft:CircleTransformation />
-                                </ff:CachedImage.Transformations>
-                            </ff:CachedImage>
-                            <Entry Text="{Binding CommentText, Mode=OneWayToSource}"
-                                    Placeholder="Berikan komentar..."
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="FillAndExpand"
-                                    FontSize="Small"
-                                    TextColor="{StaticResource DarkTextColor}"
-                                    PlaceholderColor="{StaticResource MediumGrayTextColor}"
-                                    ReturnCommand="{Binding PostCommentCommand}"
-                                    TextChanged="CommentEntry_TextChanged"
-                                    Margin="0,3"/>
-                            <Label Text="Kirim"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Start"
-                                    FontSize="Small"
-                                    TextColor="{StaticResource ActiveColor}"
-                                    Margin="0,3"
-                                    IsVisible="{Binding CanPostComment, Mode=OneWay}">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding PostCommentCommand}"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
+                            <ff:CachedImage.Transformations>
+                                <fft:CircleTransformation />
+                            </ff:CachedImage.Transformations>
+                        </ff:CachedImage>
+
+                        <Entry Text="{Binding CommentText, Mode=OneWayToSource}"
+                               Placeholder="Berikan komentar..."
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               VerticalOptions="Center"
+                               FontSize="Small"
+                               TextColor="{StaticResource DarkTextColor}"
+                               PlaceholderColor="{StaticResource MediumGrayTextColor}"
+                               ReturnCommand="{Binding PostCommentCommand}"
+                               IsVisible="{Binding IsLoggedIn}"
+                               TextChanged="CommentEntry_TextChanged"/>
+
+                        <Label Text="Kirim"
+                               Grid.Column="2"
+                               Grid.Row="1"
+                               VerticalOptions="Center"
+                               FontSize="Small"
+                               TextColor="{StaticResource ActiveColor}"
+                               Margin="0,3"
+                               IsVisible="{Binding CanPostComment, Mode=OneWay}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PostCommentCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
                         <c:FlatButton Text="Masuk untuk memberi komentar"
-                                        VerticalOptions="Start"
-                                        HorizontalOptions="Center"
-                                        FontSize="Small"
-                                        TextColor="White"
-                                        BackgroundColor="{StaticResource ActiveColor}"
-                                        BorderColor="{StaticResource ActiveColor}"
-                                        BorderWidth="1"
-                                        BorderRadius="30"
-                                        Margin="0,5"
-                                        Command="{Binding GotoProfileCommand}"
-                                        IsVisible="{Binding IsNotLoggedIn}"/>
-                    </StackLayout>
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2"
+                                      Grid.Row="1"
+                                      VerticalOptions="Center"
+                                      FontSize="Small"
+                                      TextColor="White"
+                                      BackgroundColor="{StaticResource ActiveColor}"
+                                      BorderColor="{StaticResource ActiveColor}"
+                                      BorderWidth="1"
+                                      BorderRadius="30"
+                                      Margin="0,5"
+                                      Command="{Binding GotoProfileCommand}"
+                                      IsVisible="{Binding IsNotLoggedIn}"/>
+                    </Grid>
                 </ListView.Footer>
             </ListView>
         </ScrollView>

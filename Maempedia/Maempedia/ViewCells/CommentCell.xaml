@@ -5,7 +5,7 @@
           xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
           x:Class="Maempedia.ViewCells.CommentCell">
     <ViewCell.View>
-        <StackLayout HorizontalOptions="Fill"
+        <!--<StackLayout HorizontalOptions="Fill"
                      VerticalOptions="Start"
                      Orientation="Horizontal"
                      Padding="20,7">
@@ -54,5 +54,65 @@
                        Margin="0"/>
             </StackLayout>
         </StackLayout>
+        -->
+
+        <Grid Padding="20,7"
+              ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <ff:CachedImage Source="{Binding PhotoThumbURL}"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            Aspect="AspectFit"
+                            DownsampleToViewSize="True"
+                            LoadingPlaceholder="profilepictureplaceholder.png"
+                            ErrorPlaceholder="profilepictureplaceholder.png"
+                            TransformPlaceholders="False"
+                            Margin="3,0">
+                <ff:CachedImage.Transformations>
+                    <fft:CircleTransformation />
+                </ff:CachedImage.Transformations>
+            </ff:CachedImage>
+
+            <StackLayout Grid.Column="1"
+                         Grid.Row="0"
+                         Orientation="Horizontal"
+                         Padding="0">
+                <Label Text="{Binding Username}"
+                       VerticalOptions="End"
+                       HorizontalOptions="StartAndExpand"
+                       FontAttributes="Bold"
+                       FontSize="Small"
+                       TextColor="{StaticResource DarkTextColor}"
+                       Margin="0"/>
+                <Label Text="{Binding DateTimeText}"
+                       VerticalOptions="End"
+                       HorizontalOptions="End"
+                       FontAttributes="None"
+                       FontSize="Small"
+                       TextColor="{StaticResource MediumGrayTextColor}"
+                       Margin="0"/>
+            </StackLayout>
+            
+            <Label Text="{Binding Message}"
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   FontAttributes="None"
+                   FontSize="Small"
+                   TextColor="{StaticResource DarkTextColor}"
+                   Margin="0"/>
+        </Grid>
     </ViewCell.View>
 </ViewCell>
