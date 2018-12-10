@@ -252,7 +252,7 @@
                 </ListView.Header>
                 <ListView.Footer>
                     <Grid Margin="20,5,20,20"
-                          HeightRequest="135">
+                          HeightRequest="140">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="*"/>
@@ -263,7 +263,8 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Text="{Binding ViewCommentsText}"
+                        <Label x:Name="viewCommentsLabel"
+                               Text="{Binding ViewCommentsText}"
                                Grid.Column="0"
                                Grid.ColumnSpan="3"
                                Grid.Row="0"
@@ -271,7 +272,7 @@
                                FontAttributes="None"
                                TextColor="{StaticResource MediumGrayTextColor}"
                                IsVisible="{Binding ShowViewComments}"
-                               Margin="5,15,5,25">
+                               Margin="5,10">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ViewCommentsCommand}"/>
                             </Label.GestureRecognizers>
@@ -333,6 +334,14 @@
                                       Margin="0,5"
                                       Command="{Binding GotoProfileCommand}"
                                       IsVisible="{Binding IsNotLoggedIn}"/>
+                        
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid"
+                                         Binding="{Binding Source={x:Reference viewCommentsLabel}, Path=IsVisible}"
+                                         Value="True">
+                                <Setter Property="HeightRequest" Value="190" />
+                            </DataTrigger>
+                        </Grid.Triggers>
                     </Grid>
                 </ListView.Footer>
             </ListView>
