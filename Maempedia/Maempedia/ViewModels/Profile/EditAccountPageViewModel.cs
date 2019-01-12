@@ -141,7 +141,7 @@ namespace Maempedia.ViewModels.Profile
             }
 
             this.UsernameIsChecking = true;
-            var results = await AccountService.CheckUsernameIsValid(this.UsernameText);
+            var results = await this.WebApiService.Account.CheckUsernameIsValid(this.UsernameText);
             this.UsernameIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)
@@ -249,7 +249,7 @@ namespace Maempedia.ViewModels.Profile
             owner.Username = this.UsernameText;
             owner.Password = this.PasswordText;
 
-            var result = await AccountService.UpdateAccount(owner, null);
+            var result = await this.WebApiService.Account.UpdateAccount(owner, null);
 
             loading.Hide();
 

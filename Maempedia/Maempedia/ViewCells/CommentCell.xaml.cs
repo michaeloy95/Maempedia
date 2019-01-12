@@ -1,6 +1,6 @@
 ﻿using Maempedia.Interfaces;
 using Maempedia.Models;
-using Maempedia.Services;
+using Maempedia.Services.WebApi;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -19,7 +19,6 @@ namespace Maempedia.ViewCells
 
         private void Report_Clicked(object sender, EventArgs e)
         {
-
         }
 
         private async void Delete_Clicked(object sender, EventArgs e)
@@ -44,7 +43,7 @@ namespace Maempedia.ViewCells
                 {
                     vm.IsBusy = true;
 
-                    await CommentService.DeleteComment(
+                    await WebApiService.Instance.Comment.DeleteComment(
                         item.ID,
                         vm.User.Username,
                         vm.User.Password);

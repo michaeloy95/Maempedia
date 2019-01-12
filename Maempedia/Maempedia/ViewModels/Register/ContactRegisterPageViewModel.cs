@@ -103,7 +103,7 @@ namespace Maempedia.ViewModels.Register
             }
 
             this.ContactIsChecking = true;
-            var results = await AccountService.CheckContactIsValid(this.ContactText);
+            var results = await this.WebApiService.Account.CheckContactIsValid(this.ContactText);
             this.ContactIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)
@@ -141,7 +141,7 @@ namespace Maempedia.ViewModels.Register
 
             loading.Show();
 
-            var result = await AccountService.TryRegister(this.CurOwner.Username, this.CurOwner.Password, this.CurOwner.Email, this.CurOwner.ContactWA);
+            var result = await this.WebApiService.Account.TryRegister(this.CurOwner.Username, this.CurOwner.Password, this.CurOwner.Email, this.CurOwner.ContactWA);
 
             if (result == ServerResponseStatus.VALID &&
                 !String.IsNullOrEmpty(this.CurOwner.ProfilePicture))
@@ -152,7 +152,7 @@ namespace Maempedia.ViewModels.Register
                 float height = width * this.ImageAspectRatio;
                 imageBytes = DependencyService.Get<IMediaHelper>().ResizeImage(imageBytes, width, height);
 
-                result = await AccountService.UploadImage(imageBytes, this.User.ID);
+                result = await this.WebApiService.Account.UploadImage(imageBytes, this.User.ID);
             }
 
             loading.Hide();

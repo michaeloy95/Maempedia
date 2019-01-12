@@ -158,7 +158,7 @@ workflows:
             title: Notify (apk)
             is_always_run: false
             inputs:
-            - webhook_url: "$SLACK_BUILDS_WEBHOOK"
+            - webhook_url: "$SLACK_BUILDS_WEBHOOK_URL"
             - channel: "#builds"
             - from_username: Maempedia APK
             - from_username_on_error: Maempedia APK

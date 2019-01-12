@@ -88,7 +88,7 @@ namespace Maempedia.ViewModels.Owner
                 return new List<Models.Menu>();
             }
 
-            return await MenuService.GetMenusFromOwnerId(owner);
+            return await this.WebApiService.Menu.GetMenusFromOwnerId(owner);
         }
 
         private async void SelectMenu(Models.Menu menu)

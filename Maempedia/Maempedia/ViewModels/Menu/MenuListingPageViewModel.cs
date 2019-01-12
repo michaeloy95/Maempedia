@@ -63,7 +63,7 @@ namespace Maempedia.ViewModels.Menu
 
             this.IsRefreshing = true;
 
-            var list = await MenuService.GetMenusFromOwnerId(this.User.GetUser());
+            var list = await this.WebApiService.Menu.GetMenusFromOwnerId(this.User.GetUser());
             list = list ?? new List<Models.Menu>();
 
             this.User.SetMenuList(list);

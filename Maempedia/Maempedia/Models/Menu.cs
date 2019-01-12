@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Globalization;
 
 namespace Maempedia.Models
@@ -70,6 +71,20 @@ namespace Maempedia.Models
                     Longitude = localMenu.Longitude
                 }
             };
+        }
+
+        public Menu (JObject json)
+        {
+            this.ID = json["id"].ToString();
+            this.Name = json["name"].ToString();
+            this.Headline = json["description"].ToString();
+            this.Portion = json["portion"].ToString();
+            this.ImageSource = "https://www." + json["photo_url"].ToString();
+            this.Price = float.Parse(json["price"].ToString());
+            this.Like = int.Parse(json["like"].ToString());
+            this.Promoted = bool.Parse(json["promoted"].ToString());
+            this.PostID = json["post_id"].ToString();
+            this.Owner = new Owner((JObject)json["owner"]);
         }
     }
 }

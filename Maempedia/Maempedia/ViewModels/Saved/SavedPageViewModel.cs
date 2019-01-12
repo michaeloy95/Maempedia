@@ -87,7 +87,7 @@ namespace Maempedia.ViewModels.Saved
                         return;
                     }
 
-                    Models.Menu newMenu = await MenuService.GetMenu(menu.ID);
+                    Models.Menu newMenu = await this.WebApiService.Menu.GetMenu(menu.ID);
                     if (newMenu == null)
                     {
                         return;

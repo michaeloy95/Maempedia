@@ -1,5 +1,4 @@
 ﻿using Maempedia.Models;
-using Maempedia.Services;
 using Maempedia.Views.Owner;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,7 +28,7 @@ namespace Maempedia.ViewModels.Map
         {
             const int MAX_OWNERS = 20;
 
-            return await OwnerService.GetNearbyOwners(pos.Latitude, pos.Longitude, MAX_OWNERS);
+            return await this.WebApiService.Owner.GetNearbyOwners(pos.Latitude, pos.Longitude, MAX_OWNERS);
         }
 
         private async void OpenOwnerDetail(Models.Owner owner)
