@@ -209,7 +209,7 @@ namespace Maempedia.ViewModels.Profile
             }
 
             this.NameIsChecking = true;
-            var results = await AccountService.CheckNameIsValid(this.NameText);
+            var results = await this.WebApiService.Account.CheckNameIsValid(this.NameText);
             this.NameIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)
@@ -255,7 +255,7 @@ namespace Maempedia.ViewModels.Profile
                 imageBytes = DependencyService.Get<IMediaHelper>().ResizeImage(imageBytes, width, height);
             }
 
-            var result = await AccountService.UpdateAccount(owner, imageBytes);
+            var result = await this.WebApiService.Account.UpdateAccount(owner, imageBytes);
 
             loading.Hide();
 

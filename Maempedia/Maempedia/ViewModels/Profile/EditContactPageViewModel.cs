@@ -129,7 +129,7 @@ namespace Maempedia.ViewModels.Profile
             }
 
             this.WAContactIsChecking = true;
-            var results = await AccountService.CheckContactIsValid(this.WAContactText);
+            var results = await this.WebApiService.Account.CheckContactIsValid(this.WAContactText);
             this.WAContactIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)
@@ -178,7 +178,7 @@ namespace Maempedia.ViewModels.Profile
             }
 
             this.EmailIsChecking = true;
-            var results = await AccountService.CheckEmailIsValid(this.EmailText);
+            var results = await this.WebApiService.Account.CheckEmailIsValid(this.EmailText);
             this.EmailIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)
@@ -212,7 +212,7 @@ namespace Maempedia.ViewModels.Profile
             owner.ContactWA = this.WAContactText;
             owner.Email = this.EmailText;
 
-            var result = await AccountService.UpdateAccount(owner, null);
+            var result = await this.WebApiService.Account.UpdateAccount(owner, null);
 
             loading.Hide();
 

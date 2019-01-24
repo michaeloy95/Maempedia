@@ -1,7 +1,6 @@
 ﻿using Maempedia.Common;
 using Maempedia.Enum;
 using Maempedia.Interfaces;
-using Maempedia.Services;
 using Maempedia.Views.Menu;
 using Plugin.Connectivity;
 using System;
@@ -236,7 +235,7 @@ namespace Maempedia.ViewModels.Menu
             float height = width * parentPage.ViewModel.ImageAspectRatio;
             imageBytes = DependencyService.Get<IMediaHelper>().ResizeImage(imageBytes, width, height);
 
-            var result = await MenuService.AddMenu(menu, imageBytes, this.User.ID, this.User.Username, this.User.Password);
+            var result = await this.WebApiService.Menu.AddMenu(menu, imageBytes, this.User.ID, this.User.Username, this.User.Password);
 
             loading.Hide();
 

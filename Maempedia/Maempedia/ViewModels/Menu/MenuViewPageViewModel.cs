@@ -167,7 +167,7 @@ namespace Maempedia.ViewModels.Menu
                 imageBytes = DependencyService.Get<IMediaHelper>().ResizeImage(imageBytes, width, height);
             }
 
-            var result = await MenuService.UpdateMenu(this.SelectedMenu, imageBytes, this.User.Username, this.User.Password);
+            var result = await this.WebApiService.Menu.UpdateMenu(this.SelectedMenu, imageBytes, this.User.Username, this.User.Password);
 
             loading.Hide();
 
@@ -207,7 +207,7 @@ namespace Maempedia.ViewModels.Menu
 
             loading.Show();
 
-            var result = await MenuService.DeleteMenu(this.SelectedMenu.ID, this.User.Username, this.User.Password);
+            var result = await this.WebApiService.Menu.DeleteMenu(this.SelectedMenu.ID, this.User.Username, this.User.Password);
 
             loading.Hide();
 

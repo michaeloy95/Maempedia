@@ -1,0 +1,218 @@
+---
+format_version: '6'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: xamarin
+workflows:
+    _turnBillOn:
+        steps:
+        - curl-ping:
+            is_skippable: true
+            inputs:
+            - ping_url: https://1p3rkm5a41.execute-api.us-west-2.amazonaws.com/prod/Lifx-BuildRobotLamp
+            - curl_params: '-H "Content-Type: application/json" -X POST -d ''{"power": "on","color": "blue","brightness": 0.5}'''
+
+    _turnBillOff:
+        steps:
+        - curl-ping:
+            is_skippable: true
+            is_always_run: true
+            inputs:
+            - ping_url: https://1p3rkm5a41.execute-api.us-west-2.amazonaws.com/prod/Lifx-BuildRobotLamp
+            - curl_params: '-H "Content-Type: application/json" -X POST -d ''{"power": "on","buildStatus": $BITRISE_BUILD_STATUS}'''
+              opts:
+                is_expand: true
+
+    _offsetBuildNumber:
+        steps:
+        - script:
+            inputs:
+            - content: |-
+                #!/bin/bash
+                # see https://bitrise.uservoice.com/forums/235233-general/suggestions/10798152-set-bitrise-build-number
+                set -e
+
+                if [ -z "$BITRISE_BUILD_NUMBER" ] ; then
+                  echo " [!] BITRISE_BUILD_NUMBER not provided"
+                  exit 1
+                fi
+                echo "=> Original BITRISE_BUILD_NUMBER: $BITRISE_BUILD_NUMBER"
+
+                set -x
+                build_number_offset=16
+                new_build_num=$(($BITRISE_BUILD_NUMBER + $build_number_offset))
+                envman add --key BITRISE_BUILD_NUMBER --value $new_build_num
+                envman add --key BUILD_NUMBER --value $new_build_num
+
+    _installDotNetCore:
+        steps:
+        - script:
+            inputs:
+            - content: |-
+                #!/bin/bash
+                set -ex
+
+                echo "Installing .NET core"
+                brew update
+                brew install openssl
+                mkdir -p /usr/local/lib
+                ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
+                ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
+                echo "Install .NET Core SDK"
+                wget https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh
+                chmod +x dotnet-install.sh
+                ./dotnet-install.sh  --channel "2.0"
+                export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+                export DOTNET_CLI_TELEMETRY_OPTOUT=1
+                ln -s /Users/vagrant/.dotnet/dotnet /usr/local/bin/dotnet
+                echo "Installed .NET Core"
+                dotnet --version
+
+    _downloadUtilities:
+        steps:
+        - file-downloader:
+            inputs:
+            - source: "$BITRISEIO_ANDROID_KEYSTORE_URL"
+            - destination: "$BITRISE_SOURCE_DIR/code-heroes.keystore"
+            
+    _build:
+        steps:
+        - cache-pull:
+        - certificate-and-profile-installer:
+        - script:
+            title: Build
+            inputs:
+            - content: |-
+                #!/bin/bash
+                set -ex
+        - nuget-restore:
+        - xamarin-archive:
+            inputs:
+                - xamarin_solution: "$BITRISE_PROJECT_PATH"
+                - xamarin_configuration: "$BITRISE_XAMARIN_CONFIGURATION"
+                - project_type_whitelist: android
+                - xamarin_platform: "$BITRISE_XAMARIN_PLATFORM"
+        - sign-apk:
+        - cache-push:
+            inputs:
+            - cache_paths: |-
+                /Users/vagrant/.nuget/
+        - deploy-to-bitrise-io:
+            inputs:
+            - notify_user_groups: none
+            - deploy_path: "$BITRISE_APK_PATH"
+            outputs:
+            - BITRISE_PUBLIC_INSTALL_PAGE_URL: ANDROID_PRODUCTION_INSTALL_PAGE
+
+    release:
+        envs:
+        - ENVIRONMENTS: "PRODUCTION"
+        - IOS_CONFIGURATION: AppStore
+        - TAG: true
+        before_run:
+        - _turnBillOn
+        - _installDotNetCore
+        - _offsetBuildNumber
+        - _downloadUtilities
+        - _build
+        steps:
+        - google-play-deploy:
+            inputs:
+            - service_account_json_key_path: "$BITRISEIO_GOOGLE_PLAY_API_KEYSTORE_URL"
+            - package_name: "$ANDROID_PACKAGE_ID"
+            - apk_path: "$BITRISE_APK_PATH"
+            - whatsnews_dir: ''
+            - service_account_email: ''
+            - key_file_path: ''
+        - slack:
+            title: Notify (Google Play)
+            inputs:
+            - webhook_url: "$SLACK_BUILDS_WEBHOOK_URL"
+            - channel: "#team-general"
+            - from_username: APK
+            - from_username_on_error: APK
+            - message: 'Build ($BUILD_NUMBER) has been successfully uploaded to Google
+                Play: https://play.google.com/apps/publish/'
+            - message_on_error: 'Build ($BUILD_NUMBER) failed to upload to Google Play:
+                https://play.google.com/apps/publish/'
+            - emoji: ":android:"
+            - emoji_on_error: ":negative_squared_cross_mark:"
+        after_run:
+        - _turnBillOff
+
+    slack:
+        envs:
+        - ENVIRONMENTS: "PRODUCTION"
+        - IOS_CONFIGURATION: Ad-Hoc
+        - TAG: false
+        before_run:
+        - _turnBillOn
+        - _installDotNetCore
+        - _offsetBuildNumber
+        - _downloadUtilities
+        - _build
+        steps:
+        - create-install-page-qr-code:
+            inputs:
+            - public_install_page_url: "$ANDROID_PRODUCTION_INSTALL_PAGE"
+        - slack:
+            title: Notify (apk)
+            is_always_run: false
+            inputs:
+            - webhook_url: "$SLACK_BUILDS_WEBHOOK_URL"
+            - channel: "#builds"
+            - from_username: Maempedia APK
+            - from_username_on_error: Maempedia APK
+            - emoji: ":android:"
+            - emoji_on_error: ":negative_squared_cross_mark:"
+            - message: |-
+                Production (our dev): $ANDROID_PRODUCTION_INSTALL_PAGE
+            - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
+        after_run:
+        - _turnBillOff
+
+app:
+  envs:
+  - opts:
+      is_expand: false
+    ANDROID_APP_BUNDLE_ID: "maempedia.com.apk"
+  - opts:
+      is_expand: false
+    SLACK_BUILDS_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: Maempedia.sln
+  - opts:
+      is_expand: false
+    BITRISE_XAMARIN_CONFIGURATION: Release
+  - opts:
+      is_expand: false
+    BITRISE_XAMARIN_PLATFORM: Any CPU
+  - opts:
+      is_expand: true
+    BUILD_NUMBER: "$BITRISE_BUILD_NUMBER"
+  - opts:
+      is_expand: true
+    ANDROID_KEYSTORE_PATH: "$BITRISE_SOURCE_DIR/keystore.jks"
+  - opts:
+      is_expand: true
+    BUILD_URL: "$BITRISE_BUILD_URL"
+  - opts:
+      is_expand: true
+    DEPLOY_LOCALLY: true
+  - opts:
+      is_expand: true
+    LOCAL_DEPLOY_DIR: "$BITRISE_DEPLOY_DIR"
+
+trigger_map:
+- push_branch: develop
+  workflow: slack
+- push_branch: feature/*
+  workflow: slack
+- push_branch: fix/*
+  workflow: slack
+- push_branch: chore/*
+  workflow: slack
+- push_branch: design/*
+  workflow: slack
+- push_branch: master
+  workflow: release

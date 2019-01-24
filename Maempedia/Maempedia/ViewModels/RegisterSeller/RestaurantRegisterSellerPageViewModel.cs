@@ -121,7 +121,7 @@ namespace Maempedia.ViewModels.RegisterSeller
             }
 
             this.NameIsChecking = true;
-            var results = await AccountService.CheckNameIsValid(this.NameText);
+            var results = await this.WebApiService.Account.CheckNameIsValid(this.NameText);
             this.NameIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)

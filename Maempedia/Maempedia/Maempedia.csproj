@@ -80,15 +80,17 @@
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\ProfileMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AccountService.cs" />
-    <Compile Include="Services\CommentService.cs" />
-    <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Services\WebApi\AccountApi.cs" />
+    <Compile Include="Services\WebApi\ApiRequest.cs" />
+    <Compile Include="Services\WebApi\CommentApi.cs" />
+    <Compile Include="Services\WebApi\MenuApi.cs" />
     <Compile Include="Services\AutoCompleteLocationService.cs" />
     <Compile Include="Interfaces\IDataStore.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\OwnerService.cs" />
+    <Compile Include="Services\WebApi\OwnerApi.cs" />
     <Compile Include="Data\LocalDatabaseSavedMenu.cs" />
+    <Compile Include="Services\WebApi\WebApiService.cs" />
     <Compile Include="ViewCells\CommentCell.xaml.cs">
       <DependentUpon>CommentCell.xaml</DependentUpon>
     </Compile>
@@ -633,6 +635,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

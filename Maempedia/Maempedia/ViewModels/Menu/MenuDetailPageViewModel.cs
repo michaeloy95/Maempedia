@@ -2,7 +2,6 @@
 using Maempedia.Enum;
 using Maempedia.Interfaces;
 using Maempedia.Models;
-using Maempedia.Services;
 using Maempedia.Views.Login;
 using Maempedia.Views.Map;
 using Maempedia.Views.Menu;
@@ -12,7 +11,6 @@ using Plugin.Share;
 using Plugin.Share.Abstractions;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -134,7 +132,7 @@ namespace Maempedia.ViewModels.Menu
         private async void InitialiseFields()
         {
             this.ProfilePictureThumb = this.User.ProfilePictureThumb;
-            var commentsData = await CommentService.GetComments(this.SelectedMenu.ID, 1, 2);
+            var commentsData = await this.WebApiService.Comment.GetComments(this.SelectedMenu.ID, 1, 2);
 
             if (commentsData != null)
             {
@@ -236,7 +234,7 @@ namespace Maempedia.ViewModels.Menu
                 return;
             }
 
-            var result = await CommentService.AddComment(
+            var result = await this.WebApiService.Comment.AddComment(
                 this.CommentText,
                 this.User.ID,
                 this.SelectedMenu.ID,
@@ -258,7 +256,7 @@ namespace Maempedia.ViewModels.Menu
                     return;
             }
 
-            var newComment = (await CommentService.GetComments(this.SelectedMenu.ID, 1, 1)).Item1[0];
+            var newComment = (await this.WebApiService.Comment.GetComments(this.SelectedMenu.ID, 1, 1)).Item1[0];
             this.CommentList.Insert(0, newComment);
 
             this.CommentText = string.Empty;

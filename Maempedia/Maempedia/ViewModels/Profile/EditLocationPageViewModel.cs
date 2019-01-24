@@ -173,7 +173,7 @@ namespace Maempedia.ViewModels.Profile
             owner.Location.Latitude = this.Point.Latitude;
             owner.Location.Longitude = this.Point.Longitude;
 
-            var result = await AccountService.UpdateAccount(owner, null);
+            var result = await this.WebApiService.Account.UpdateAccount(owner, null);
 
             loading.Hide();
 

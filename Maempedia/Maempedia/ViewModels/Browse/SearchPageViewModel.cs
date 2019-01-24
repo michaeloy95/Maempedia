@@ -80,8 +80,8 @@ namespace Maempedia.ViewModels.Browse
             {
                 this.MyPosition = this.MyPosition ?? await LocationService.GetCurrentLocation(this);
 
-                var list = this.MyPosition == null ? await MenuService.GetMenus(1, SortMenuBy.Search, keyword)
-                    : await MenuService.GetMenus(this.MyPosition.Latitude, this.MyPosition.Longitude, 1, SortMenuBy.Search, keyword);
+                var list = this.MyPosition == null ? await this.WebApiService.Menu.GetMenus(1, SortMenuBy.Search, keyword)
+                    : await this.WebApiService.Menu.GetMenus(1, SortMenuBy.Search, keyword, this.MyPosition.Latitude, this.MyPosition.Longitude);
 
                 if (list == null)
                 {
@@ -130,8 +130,8 @@ namespace Maempedia.ViewModels.Browse
             {
                 this.IsLoadingMore = true;
 
-                var moreMenuList = this.MyPosition == null ? await MenuService.GetMenus(this.MenuList.Count + 1, SortMenuBy.Search, this.SearchEntryText)
-                        : await MenuService.GetMenus(this.MyPosition.Latitude, this.MyPosition.Longitude, this.MenuList.Count + 1, SortMenuBy.Search, this.SearchEntryText);
+                var moreMenuList = this.MyPosition == null ? await this.WebApiService.Menu.GetMenus(this.MenuList.Count + 1, SortMenuBy.Search, this.SearchEntryText)
+                        : await this.WebApiService.Menu.GetMenus(this.MenuList.Count + 1, SortMenuBy.Search, this.SearchEntryText, this.MyPosition.Latitude, this.MyPosition.Longitude);
 
                 if (moreMenuList == null)
                 {

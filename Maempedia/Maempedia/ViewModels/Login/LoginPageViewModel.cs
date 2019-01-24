@@ -1,8 +1,5 @@
 ﻿using Maempedia.Enum;
 using Maempedia.Interfaces;
-using Maempedia.Services;
-using Maempedia.Views.Browse;
-using Maempedia.Views.Menu;
 using Maempedia.Views.Profile;
 using Plugin.Connectivity;
 using System;
@@ -69,7 +66,7 @@ namespace Maempedia.ViewModels.Login
             var loading = DependencyService.Get<ILoadingHelper>();
 
             loading.Show();
-            var result = await AccountService.TryLogin(this.UsernameText, this.PasswordText);
+            var result = await this.WebApiService.Account.TryLogin(this.UsernameText, this.PasswordText);
             loading.Hide();
 
             switch (result)

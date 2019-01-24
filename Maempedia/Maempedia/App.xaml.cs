@@ -2,6 +2,7 @@
 using Maempedia.Data;
 using Maempedia.Interfaces;
 using Maempedia.Services;
+using Maempedia.Services.WebApi;
 using Maempedia.Views;
 using Plugin.Connectivity;
 using System.Threading.Tasks;
@@ -59,7 +60,7 @@ namespace Maempedia
                             return;
                         }
 
-                        var owner = await OwnerService.GetOwner(user.ID);
+                        var owner = await WebApiService.Instance.Owner.GetOwner(User.ID);
                         if (owner == null)
                         {
                             user.ProfileSynchronised = false;

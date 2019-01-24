@@ -1,11 +1,10 @@
 ﻿using Maempedia.Data;
 using Maempedia.Interfaces;
-using Maempedia.Views;
+using Maempedia.Services.WebApi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
 namespace Maempedia
 {
@@ -13,13 +12,9 @@ namespace Maempedia
     {
         public User User => App.User;
 
-        public INavigationService NavigationService
-        {
-            get
-            {
-                return App.NavigationService;
-            }
-        }
+        public INavigationService NavigationService => App.NavigationService;
+
+        public WebApiService WebApiService => WebApiService.Instance;
 
         bool isBusy = false;
         public bool IsBusy

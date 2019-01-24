@@ -138,7 +138,7 @@ namespace Maempedia.ViewModels.Promotion
 
             loading.Show();
             
-            var result = await MenuService.RequestPromotion(this.MenuID, this.PromotionPrice, this.DayCount, string.Empty, this.User.Username, this.User.Password);
+            var result = await this.WebApiService.Menu.RequestPromotion(this.MenuID, this.PromotionPrice, this.DayCount, string.Empty, this.User.Username, this.User.Password);
 
             loading.Hide();
 

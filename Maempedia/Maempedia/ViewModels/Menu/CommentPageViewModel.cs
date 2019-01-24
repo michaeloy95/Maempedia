@@ -1,7 +1,6 @@
 ﻿using Maempedia.Enum;
 using Maempedia.Interfaces;
 using Maempedia.Models;
-using Maempedia.Services;
 using Maempedia.Views.Login;
 using Plugin.Connectivity;
 using System;
@@ -110,7 +109,7 @@ namespace Maempedia.ViewModels.Menu
                 return;
             }
 
-            var commentsData = await CommentService.GetComments(
+            var commentsData = await this.WebApiService.Comment.GetComments(
                 this.SelectedMenu.ID,
                 this.startComment,
                 this.countComment);
@@ -155,7 +154,7 @@ namespace Maempedia.ViewModels.Menu
 
             try
             {
-                var moreCommentList = await CommentService.GetComments(
+                var moreCommentList = await this.WebApiService.Comment.GetComments(
                     this.SelectedMenu.ID,
                     this.CommentList.Count + 1,
                     this.countComment);
@@ -219,7 +218,7 @@ namespace Maempedia.ViewModels.Menu
                 return;
             }
 
-            var result = await CommentService.AddComment(
+            var result = await this.WebApiService.Comment.AddComment(
                 this.CommentText,
                 this.User.ID,
                 this.SelectedMenu.ID,
@@ -241,7 +240,7 @@ namespace Maempedia.ViewModels.Menu
                     return;
             }
 
-            var newComment = (await CommentService.GetComments(this.SelectedMenu.ID, 1, 1)).Item1[0];
+            var newComment = (await this.WebApiService.Comment.GetComments(this.SelectedMenu.ID, 1, 1)).Item1[0];
             this.CommentList.Insert(0, newComment);
 
             this.CommentText = string.Empty;

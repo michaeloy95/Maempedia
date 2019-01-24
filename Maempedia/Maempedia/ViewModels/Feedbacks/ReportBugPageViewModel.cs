@@ -1,6 +1,4 @@
 ﻿using Maempedia.Interfaces;
-using Maempedia.Services;
-using Maempedia.Views.Feedbacks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -24,7 +22,7 @@ namespace Maempedia.ViewModels.Feedbacks
 
         public async void SendReport()
         {
-            await AccountService.ReportBugs(this.User.ID, this.MessageText);
+            await this.WebApiService.Account.ReportBugs(this.User.ID, this.MessageText);
             DependencyService.Get<IMessageHelper>().ShortAlert("Pesan telah dikirim. Terima kasih.");
             
             await this.NavigationService.GoBack(2);

@@ -207,7 +207,7 @@ namespace Maempedia.ViewModels.RegisterSeller
                 this.CurOwner.ProfilePictureThumb = this.User.ProfilePictureThumb;
             }
 
-            var result = await AccountService.UpdateAccount(this.CurOwner, imageBytes);
+            var result = await this.WebApiService.Account.UpdateAccount(this.CurOwner, imageBytes);
 
             this.User.SetUser(this.CurOwner);
 

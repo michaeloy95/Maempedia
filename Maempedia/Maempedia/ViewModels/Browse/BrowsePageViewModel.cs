@@ -134,8 +134,8 @@ namespace Maempedia.ViewModels.Browse
             {
                 this.MyPosition = this.MyPosition ?? await LocationService.GetCurrentLocation(this);
                 
-                var list = this.MyPosition == null ? await MenuService.GetMenus(1, this.SortBy, string.Empty)
-                    : await MenuService.GetMenus(this.MyPosition.Latitude, this.MyPosition.Longitude, 1, this.SortBy, string.Empty);
+                var list = this.MyPosition == null ? await this.WebApiService.Menu.GetMenus(1, this.SortBy, string.Empty)
+                    : await this.WebApiService.Menu.GetMenus(1, this.SortBy, string.Empty, this.MyPosition.Latitude, this.MyPosition.Longitude);
                 
                 if (list == null)
                 {
@@ -249,8 +249,8 @@ namespace Maempedia.ViewModels.Browse
             {
                 this.IsLoadingMore = true;
 
-                var moreMenuList = this.MyPosition == null ? await MenuService.GetMenus(this.MenuList.Count + 1, this.SortBy, string.Empty)
-                        : await MenuService.GetMenus(this.MyPosition.Latitude, this.MyPosition.Longitude, this.MenuList.Count + 1, this.SortBy, string.Empty);
+                var moreMenuList = this.MyPosition == null ? await this.WebApiService.Menu.GetMenus(this.MenuList.Count + 1, this.SortBy, string.Empty)
+                        : await this.WebApiService.Menu.GetMenus(this.MenuList.Count + 1, this.SortBy, string.Empty, this.MyPosition.Latitude, this.MyPosition.Longitude);
                 
                 if (moreMenuList == null)
                 {

@@ -143,7 +143,7 @@ namespace Maempedia.ViewModels.Register
             }
 
             this.UsernameIsChecking = true;
-            var results = await AccountService.CheckUsernameIsValid(this.UsernameText);
+            var results = await this.WebApiService.Account.CheckUsernameIsValid(this.UsernameText);
             this.UsernameIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)
@@ -187,7 +187,7 @@ namespace Maempedia.ViewModels.Register
             }
 
             this.EmailIsChecking = true;
-            var results = await AccountService.CheckEmailIsValid(this.EmailText);
+            var results = await this.WebApiService.Account.CheckEmailIsValid(this.EmailText);
             this.EmailIsChecking = false;
 
             if (results != ServerResponseStatus.VALID)
