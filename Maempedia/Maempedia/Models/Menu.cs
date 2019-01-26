@@ -34,8 +34,28 @@ namespace Maempedia.Models
 
         public Owner Owner { get; set; }
 
+        public double Discount { get; set; }
+
+        public DateTime DiscountExpiryDate { get; set; }
+
+        public int MaxClaim { get; set; }
+
+        public int RemainingClaim { get; set; }
+
         public Menu()
         {
+            this.ID = string.Empty;
+            this.Like = 0;
+            this.Portion = string.Empty;
+            this.ImageSource = string.Empty;
+            this.Price = 0;
+            this.Promoted = false;
+            this.PostID = string.Empty;
+            this.Owner = new Owner();
+            this.Discount = 0;
+            this.DiscountExpiryDate = DateTime.Now;
+            this.MaxClaim = 0;
+            this.RemainingClaim = 0;
         }
 
         public Menu(LocalMenu localMenu)

@@ -47,6 +47,10 @@ namespace Maempedia.ViewCells
                 Debug.WriteLine(ex);
             }
 
+            this.DiscountTextLabel.Text = $"{menu.Discount*100}% OFF";
+            this.RemainingDaysLabel.Text = $"Berakhir {menu.DiscountExpiryDate.Subtract(DateTime.Now).Days} hari lagi.";
+            this.RemainingClaimLabel.Text = $"Sisa {menu.RemainingClaim} klaim";
+
             base.OnBindingContextChanged();
         }
 
@@ -106,6 +110,20 @@ namespace Maempedia.ViewCells
                 string Url = $"http://maempedia.com/detailmenu.html?id={menu.PostID}";
                 text = $"Hai Maemseller, saya tertarik dengan menu premium ini.\n*{menu.Name}* - {menu.Headline}\n\n{Url}";
             }
+
+            string url = $"https://api.whatsapp.com/send?phone={menu.Owner.ContactWA}&text={text}";
+            Device.OpenUri(new Uri(url));
+        }
+
+        private void Claim_Clicked(object sender, ClickedEventArgs e)
+        {
+            var menu = BindingContext as Models.Menu;
+            if (menu == null)
+            {
+                return;
+            }
+
+            string text = $"Hai Maemseller, saya tertarik dengan menu terdiskon anda *{menu.Name}* apa masih tersedia? Terimakasih...";
 
             string url = $"https://api.whatsapp.com/send?phone={menu.Owner.ContactWA}&text={text}";
             Device.OpenUri(new Uri(url));

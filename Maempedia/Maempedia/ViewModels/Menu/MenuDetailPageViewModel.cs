@@ -270,5 +270,13 @@ namespace Maempedia.ViewModels.Menu
         {
             this.NavigationService.NavigateTo(typeof(LoginPage));
         }
+
+        public void ClaimMenu()
+        {
+            string text = $"Hai Maemseller, saya tertarik dengan menu terdiskon anda *{this.SelectedMenu.Name}* apa masih tersedia? Terimakasih...";
+
+            string url = $"https://api.whatsapp.com/send?phone={this.SelectedMenu.Owner.ContactWA}&text={text}";
+            Device.OpenUri(new Uri(url));
+        }
     }
 }

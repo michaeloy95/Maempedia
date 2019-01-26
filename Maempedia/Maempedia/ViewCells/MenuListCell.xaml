@@ -66,64 +66,151 @@
                    VerticalOptions="FillAndExpand"
                    OutlineColor="{StaticResource DarkBackgroundColor}"
                    Padding="0">
-                <ff:CachedImage x:Name="MenuImage"
-                                HorizontalOptions="Fill"
-                                Aspect="AspectFill"
-                                CacheType="{x:Null}"
-                                DownsampleToViewSize="True"
-                                Success="MenuImage_Success"
-                                LoadingPlaceholder="menuplaceholder.png"
-                                ErrorPlaceholder="menuplaceholder.png"
-                                Margin="0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ff:CachedImage x:Name="MenuImage"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    HorizontalOptions="Fill"
+                                    Aspect="AspectFill"
+                                    CacheType="{x:Null}"
+                                    DownsampleToViewSize="True"
+                                    Success="MenuImage_Success"
+                                    LoadingPlaceholder="menuplaceholder.png"
+                                    ErrorPlaceholder="menuplaceholder.png"
+                                    Margin="0"/>
+                    <StackLayout Grid.Column="1"
+                                 Grid.Row="0"
+                                 BackgroundColor="{StaticResource Primary}">
+                        <Label x:Name="DiscountTextLabel"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource LightTextColor}"
+                               Margin="5,10" />
+                    </StackLayout>
+                </Grid>
             </Frame>
-            <StackLayout HorizontalOptions="FillAndExpand"
-                         VerticalOptions="Start"
-                         Orientation="Vertical"
-                         Padding="15,7"
-                         BackgroundColor="Transparent">
+            <Grid HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Start"
+                  Padding="15,7"
+                  BackgroundColor="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Label Text="{Binding Name}"
+                       Grid.ColumnSpan="2"
                        HorizontalOptions="StartAndExpand"
                        VerticalOptions="Center"
                        FontSize="Large"
                        FontAttributes="Bold"
                        TextColor="{StaticResource DarkTextColor}"
                        Margin="5,0"/>
-                <StackLayout HorizontalOptions="FillAndExpand"
-                             VerticalOptions="Start"
-                             Orientation="Horizontal"
-                             BackgroundColor="Transparent"
-                             Margin="5,0">
-                    <ff:CachedImage x:Name="LikeImage"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center"
-                                    WidthRequest="30"
-                                    HeightRequest="30"
-                                    CacheType="{x:Null}"
-                                    DownsampleToViewSize="True"
-                                    FadeAnimationEnabled="True"
-                                    FadeAnimationForCachedImages="True"
-                                    Margin="0">
-                        <ff:CachedImage.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnLikeImageTapped"/>
-                        </ff:CachedImage.GestureRecognizers>
-                    </ff:CachedImage>
-                    <Label Text="{Binding Like}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           FontSize="Small"
-                           FontAttributes="Bold"
-                           TextColor="{StaticResource DarkTextColor}"
-                           Margin="2,0"/>
+
+                <StackLayout Grid.Column="0"
+                             Grid.Row="1"
+                             Orientation="Vertical"
+                             BackgroundColor="Transparent">
+                    <StackLayout HorizontalOptions="Start"
+                                 VerticalOptions="Start"
+                                 Orientation="Horizontal"
+                                 BackgroundColor="Transparent"
+                                 Margin="0">
+                        <ff:CachedImage x:Name="LikeImage"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Center"
+                                        WidthRequest="30"
+                                        HeightRequest="30"
+                                        CacheType="{x:Null}"
+                                        DownsampleToViewSize="True"
+                                        FadeAnimationEnabled="True"
+                                        FadeAnimationForCachedImages="True"
+                                        Margin="0">
+                            <ff:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnLikeImageTapped"/>
+                            </ff:CachedImage.GestureRecognizers>
+                        </ff:CachedImage>
+                        <Label Text="{Binding Like}"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               FontSize="Small"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource DarkTextColor}"
+                               Margin="2,0"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="Start"
+                                 VerticalOptions="End"
+                                 Orientation="Horizontal"
+                                 BackgroundColor="Transparent"
+                                 Margin="0">
+                        <c:StrokeLabel Text="{Binding PriceString}"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="End"
+                                       FontSize="14"
+                                       TextColor="{StaticResource DarkTextColor}"
+                                       Margin="0"/>
+                        <Label Text="{Binding PriceString}"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End"
+                               HorizontalTextAlignment="End"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource ActiveColor}" />
+                    </StackLayout>
                 </StackLayout>
-                <Label Text="{Binding PriceString}"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Start"
-                       FontSize="Small"
-                       FontAttributes="Bold"
-                       TextColor="{StaticResource DarkTextColor}"
-                       Margin="5,0"/>
-                <StackLayout HorizontalOptions="FillAndExpand"
-                             VerticalOptions="Start"
+
+                <StackLayout Grid.Column="1"
+                             Grid.Row="1"
+                             Orientation="Vertical"
+                             Padding="15,7"
+                             BackgroundColor="Transparent">
+                    <c:FlatButton x:Name="ClaimButton"
+                                 Text="Klaim"
+                                 VerticalOptions="Start"
+                                 HorizontalOptions="End"
+                                 FontSize="Small"
+                                 FontAttributes="Italic"
+                                 TextColor="White"
+                                 BackgroundColor="#32CD32"
+                                 BorderRadius="10"
+                                 Margin="0"
+                                 Padding="10,-20"
+                                 Clicked="Claim_Clicked"/>
+                    <Label x:Name="RemainingDaysLabel"
+                           HorizontalOptions="End"
+                           VerticalOptions="Start"
+                           HorizontalTextAlignment="End"
+                           FontSize="Small"
+                           TextColor="{StaticResource DarkTextColor}"
+                           Margin="0" />
+                    <Label x:Name="RemainingClaimLabel"
+                           HorizontalOptions="End"
+                           VerticalOptions="Start"
+                           HorizontalTextAlignment="End"
+                           FontSize="Small"
+                           FontAttributes="Italic"
+                           TextColor="{StaticResource ActiveColor}"
+                           Margin="0" />
+                </StackLayout>
+
+                <StackLayout Grid.ColumnSpan="2"
+                             Grid.Row="2"
                              Orientation="Horizontal"
                              BackgroundColor="Transparent"
                              Margin="5,0">
@@ -142,7 +229,7 @@
                            TextColor="{StaticResource MediumGrayTextColor}"
                            Margin="0"/>
                 </StackLayout>
-            </StackLayout>
+            </Grid>
         </StackLayout>
     </ViewCell.View>
 </ViewCell>

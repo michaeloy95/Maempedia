@@ -110,7 +110,7 @@ namespace Maempedia.Services.WebApi
 
         private string ConstructUri(string endpoint)
         {
-            return $"{BASE_URL}{endpoint}?key={API_KEY}";
+            return $"{BASE_URL}{endpoint}&key={API_KEY}";
         }
     }
 }

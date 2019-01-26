@@ -144,5 +144,10 @@ namespace Maempedia.Views.Menu
 
             this.MenuImage.HeightRequest = this.MenuImage.WidthRequest * ((double)info.OriginalHeight / (double)info.OriginalWidth);
         }
+
+        private void Claim_Clicked(object sender, ClickedEventArgs e)
+        {
+            this.ViewModel.ClaimMenu();
+        }
     }
 }

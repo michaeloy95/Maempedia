@@ -58,6 +58,9 @@
     <Compile Include="Custom\CircleImage.cs" />
     <Compile Include="Custom\FlatButton.cs" />
     <Compile Include="Custom\SearchEntry.cs" />
+    <Compile Include="Custom\StrokeLabel.xaml.cs">
+      <DependentUpon>StrokeLabel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Custom\ZoomImage.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Data\User.cs" />
@@ -635,7 +638,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Custom\StrokeLabel.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

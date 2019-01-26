@@ -50,7 +50,7 @@ namespace Maempedia.ViewCells
             this.MenuImage.HeightRequest = this.MenuImage.WidthRequest * ((double)info.OriginalHeight / (double)info.OriginalWidth);
         }
 
-        private async void Promote_Clicked(object sender, System.EventArgs e)
+        private async void Promote_Clicked(object sender, ClickedEventArgs e)
         {
             var menu = BindingContext as Models.Menu;
             if (menu == null)
@@ -68,6 +68,11 @@ namespace Maempedia.ViewCells
             {
                 Debug.WriteLine($"Error: {ex.Message}");
             }
+        }
+
+        private void GiveDiscount_Clicked(object sender, ClickedEventArgs e)
+        {
+
         }
     }
 }

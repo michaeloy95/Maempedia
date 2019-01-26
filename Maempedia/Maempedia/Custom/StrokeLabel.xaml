@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="Maempedia.Custom.StrokeLabel">
+    <Label x:Name="label"
+           VerticalOptions="Center" />
+    <BoxView HeightRequest="3"
+             VerticalOptions="Center"
+             Opacity="0.5"
+             Color="Black" />
+</Grid>
