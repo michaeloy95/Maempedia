@@ -16,7 +16,7 @@ namespace Maempedia.Models
         {
             this.ID = json["id"].ToString();
             this.Username = json["username"].ToString();
-            this.Password = json["password"].ToString();
+            this.Password = json["password"]?.ToString();
             this.Email = json["email"].ToString();
             this.Name = json["name"].ToString();
             this.ProfilePicture = "https://www." + json["photo_url"].ToString();
@@ -37,8 +37,12 @@ namespace Maempedia.Models
                     : double.Parse(json["location"]?["lat"]?.ToString());
                 this.Location.Longitude = json["location"]?["lng"]?.ToString() == "" ? 0
                     : double.Parse(json["location"]?["lng"]?.ToString());
-                this.Location.Distance = json["location"]["distance"].ToString() == "N/A" ? 0
-                    : double.Parse(json["location"]["distance"].ToString());
+                
+                this.Location.Distance = 
+                    !((JObject)json["location"]).ContainsKey("distance") ||
+                    json["location"]?["distance"]?.ToString() == "N/A" 
+                        ? 0
+                        : double.Parse(json["location"]["distance"].ToString());
             }
         }
 
@@ -74,6 +78,11 @@ namespace Maempedia.Models
         {
             get
             {
+                if (this.Location == null)
+                {
+                    return "-";
+                }
+
                 string distance = this.Location.Distance == 0 ? "-"
                     : this.Location.Distance < 0.01 ? "~10 M"
                     : this.Location.Distance < 1 ? $"{Math.Round(this.Location.Distance, 3) * 1000} M"

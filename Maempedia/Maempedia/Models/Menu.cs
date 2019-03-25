@@ -36,7 +36,7 @@ namespace Maempedia.Models
 
         public double Discount { get; set; }
 
-        public DateTime DiscountExpiryDate { get; set; }
+        public int DiscountDaysLeft { get; set; }
 
         public int MaxClaim { get; set; }
 
@@ -53,7 +53,7 @@ namespace Maempedia.Models
             this.PostID = string.Empty;
             this.Owner = new Owner();
             this.Discount = 0;
-            this.DiscountExpiryDate = DateTime.Now;
+            this.DiscountDaysLeft = 0;
             this.MaxClaim = 0;
             this.RemainingClaim = 0;
         }
@@ -93,7 +93,7 @@ namespace Maempedia.Models
             };
         }
 
-        public Menu (JObject json)
+        public Menu (JObject json, Owner owner = null)
         {
             this.ID = json["id"].ToString();
             this.Name = json["name"].ToString();
@@ -104,7 +104,11 @@ namespace Maempedia.Models
             this.Like = int.Parse(json["like"].ToString());
             this.Promoted = bool.Parse(json["promoted"].ToString());
             this.PostID = json["post_id"].ToString();
-            this.Owner = new Owner((JObject)json["owner"]);
+            this.Discount = double.Parse(json["discount_percentage"].ToString());
+            this.DiscountDaysLeft = int.Parse(json["discount_days_left"].ToString());
+            this.MaxClaim = int.Parse(json["maximal_claim"].ToString());
+            this.RemainingClaim = int.Parse(json["claim_left"].ToString());
+            this.Owner = owner ?? new Owner((JObject)json["owner"]);
         }
     }
 }

@@ -4,6 +4,7 @@ using Maempedia.Models;
 using Maempedia.Views.Owner;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -47,8 +48,14 @@ namespace Maempedia.ViewCells
                 Debug.WriteLine(ex);
             }
 
+            var hasDiscount = menu.Discount != 0 && menu.DiscountDaysLeft >= 0 && menu.RemainingClaim > 0;
+            this.DiscountLayout.IsVisible = this.ClaimButtonLayout.IsVisible = this.ClaimLayout.IsVisible = this.PriceWithDiscountLayout.IsVisible = hasDiscount;
+            this.PriceNoDiscountLayout.IsVisible = !hasDiscount;
+            Grid.SetRow(this.AddressLayout, !hasDiscount ? 2 : 3);
+            
+            this.DiscountedPrice.Text = String.Format(new CultureInfo("id-ID"), "Rp. {0:N}", menu.Price - (menu.Price * menu.Discount));
             this.DiscountTextLabel.Text = $"{menu.Discount*100}% OFF";
-            this.RemainingDaysLabel.Text = $"Berakhir {menu.DiscountExpiryDate.Subtract(DateTime.Now).Days} hari lagi.";
+            this.RemainingDaysLabel.Text = $"Berakhir {menu.DiscountDaysLeft} hari lagi.";
             this.RemainingClaimLabel.Text = $"Sisa {menu.RemainingClaim} klaim";
 
             base.OnBindingContextChanged();

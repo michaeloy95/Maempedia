@@ -39,8 +39,11 @@
                                       FontSize="Small"
                                       TextColor="White"
                                       BackgroundColor="{StaticResource ActiveColor}"
+                                      BorderWidth="1"
+                                      BorderColor="{StaticResource ActiveColor}"
                                       BorderRadius="30"
                                       Command="{Binding AddMenuCommand}"
+                                      Padding="50,15"
                                       IsVisible="{Binding HasMenu}"
                                       Margin="0,5"/>
                         <StackLayout Padding="0,15"
@@ -60,6 +63,7 @@
                                           BackgroundColor="{StaticResource ActiveColor}"
                                           BorderRadius="30"
                                           Command="{Binding AddMenuCommand}"
+                                          Padding="50,15"
                                           Margin="0,5"/>
                         </StackLayout>
                     </StackLayout>

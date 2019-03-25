@@ -4,7 +4,7 @@
           xmlns:c="clr-namespace:Maempedia.Custom"
           xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
           x:Class="Maempedia.ViewCells.MyMenuListCell">
-    <StackLayout>
+    <StackLayout Padding="0,20">
         <Grid VerticalOptions="Start"
               HorizontalOptions="FillAndExpand"
               ColumnSpacing="10"
@@ -13,6 +13,10 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <StackLayout Grid.Column="0"
                          VerticalOptions="Start"
                          HorizontalOptions="FillAndExpand"
@@ -58,44 +62,45 @@
                            TextColor="{StaticResource MediumGrayTextColor}"
                            Margin="2,0"/>
                 </StackLayout>
-                <StackLayout HorizontalOptions="FillAndExpand"
-                             VerticalOptions="Start"
-                             Orientation="Horizontal"
-                             BackgroundColor="Transparent"
-                             Margin="5,0">
-                    <c:FlatButton x:Name="PromoteButton"
-                                  Text="Jadikan Premium"
-                                  VerticalOptions="Start"
-                                  HorizontalOptions="Start"
-                                  FontSize="Small"
-                                  TextColor="{StaticResource ActiveColor}"
-                                  BackgroundColor="{StaticResource LightBackgroundColor}"
-                                  BorderColor="{StaticResource LightBackgroundColor}"
-                                  BorderWidth="1"
-                                  BorderRadius="30"
-                                  Margin="0,0"
-                                  IsVisible="True"
-                                  Clicked="Promote_Clicked"/>
-                    <c:FlatButton x:Name="GiveDiscountButton"
-                                  Text="Beri Diskon"
-                                  VerticalOptions="Start"
-                                  HorizontalOptions="End"
-                                  FontSize="Small"
-                                  TextColor="{StaticResource ActiveColor}"
-                                  BackgroundColor="{StaticResource LightBackgroundColor}"
-                                  BorderColor="{StaticResource LightBackgroundColor}"
-                                  BorderWidth="1"
-                                  BorderRadius="30"
-                                  Margin="0,0"
-                                  IsVisible="True"
-                                  Clicked="GiveDiscount_Clicked"/>
+                <StackLayout x:Name="PriceNoDiscountLayout"
+                            HorizontalOptions="Start"
+                            VerticalOptions="End"
+                            Orientation="Horizontal"
+                            BackgroundColor="Transparent"
+                            Margin="0">
+                    <Label Text="{Binding PriceString}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="End"
+                            FontSize="14"
+                            TextColor="{StaticResource DarkTextColor}"
+                            Margin="0"/>
+                </StackLayout>
+                <StackLayout x:Name="PriceWithDiscountLayout"
+                            HorizontalOptions="Start"
+                            VerticalOptions="End"
+                            Orientation="Horizontal"
+                            BackgroundColor="Transparent"
+                            Margin="0">
+                    <c:StrokeLabel Text="{Binding PriceString}"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="End"
+                                   FontSize="14"
+                                   TextColor="{StaticResource DarkTextColor}"
+                                   Margin="0"/>
+                    <Label x:Name="DiscountedPrice"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           HorizontalTextAlignment="End"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource ActiveColor}" />
                 </StackLayout>
             </StackLayout>
             <StackLayout x:Name="MenuImageLayout"
                          Grid.Column="1"
                          VerticalOptions="Start"
                          HorizontalOptions="FillAndExpand"
-                         Padding="20,15">
+                         Padding="20,10">
                 <ff:CachedImage x:Name="MenuImage"
                                 HorizontalOptions="Fill"
                                 Aspect="AspectFill"
@@ -105,6 +110,43 @@
                                 LoadingPlaceholder="menuplaceholder.png"
                                 ErrorPlaceholder="menuplaceholder.png"
                                 Margin="5"/>
+            </StackLayout>
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Start"
+                         Orientation="Horizontal"
+                         BackgroundColor="Transparent"
+                         Margin="5,15">
+                <c:FlatButton x:Name="PromoteButton"
+                                Text="Jadikan Premium"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                FontSize="Small"
+                                TextColor="{StaticResource ActiveColor}"
+                                BackgroundColor="{StaticResource LightBackgroundColor}"
+                                BorderColor="{StaticResource ActiveColor}"
+                                BorderWidth="1"
+                                BorderRadius="30"
+                                Padding="50,20"
+                                Margin="5,0"
+                                IsVisible="True"
+                                Clicked="Promote_Clicked"/>
+                <c:FlatButton x:Name="GiveDiscountButton"
+                                Text="Beri Diskon"
+                                VerticalOptions="Start"
+                                HorizontalOptions="End"
+                                FontSize="Small"
+                                TextColor="{StaticResource ActiveColor}"
+                                BackgroundColor="{StaticResource LightBackgroundColor}"
+                                BorderColor="{StaticResource ActiveColor}"
+                                BorderWidth="1"
+                                BorderRadius="30"
+                                Padding="15,0"
+                                Margin="5,0"
+                                IsVisible="True"
+                                Clicked="GiveDiscount_Clicked"/>
             </StackLayout>
         </Grid>
         <BoxView VerticalOptions="Center"

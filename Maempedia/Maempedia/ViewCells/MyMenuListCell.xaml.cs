@@ -1,8 +1,9 @@
 ﻿using Maempedia.Data;
-using Maempedia.Views.Menu;
+using Maempedia.Views.Menu.Discount;
 using Maempedia.Views.Promotion;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,6 +24,11 @@ namespace Maempedia.ViewCells
             {
                 return;
             }
+
+            var hasDiscount = item.Discount != 0 && item.DiscountDaysLeft >= 0 && item.RemainingClaim > 0;
+            this.PriceWithDiscountLayout.IsVisible = hasDiscount;
+            this.PriceNoDiscountLayout.IsVisible = this.GiveDiscountButton.IsVisible = !hasDiscount;
+            this.DiscountedPrice.Text = String.Format(new CultureInfo("id-ID"), "Rp. {0:N}", item.Price - (item.Price * item.Discount));
 
             this.MenuImage.Source = item.ImageSource;
 
@@ -70,9 +76,24 @@ namespace Maempedia.ViewCells
             }
         }
 
-        private void GiveDiscount_Clicked(object sender, ClickedEventArgs e)
+        private async void GiveDiscount_Clicked(object sender, ClickedEventArgs e)
         {
+            var menu = BindingContext as Models.Menu;
+            if (menu == null)
+            {
+                return;
+            }
 
+            try
+            {
+                var vm = this.Parent.Parent.BindingContext as BaseViewModel;
+
+                await vm.NavigationService.NavigateTo(typeof(AddDiscountPage), new object[] { menu });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error: {ex.Message}");
+            }
         }
     }
 }
