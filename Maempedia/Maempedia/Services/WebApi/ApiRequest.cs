@@ -110,12 +110,7 @@ namespace Maempedia.Services.WebApi
 
         private string ConstructUri(string endpoint)
         {
-            var connector = "&";
-            if (endpoint.EndsWith("html"))
-            {
-                connector = "?";
-            }
-
+            var connector = endpoint.EndsWith("html") ? "?" : "&";
             return $"{BASE_URL}{endpoint}{connector}key={API_KEY}";
         }
     }

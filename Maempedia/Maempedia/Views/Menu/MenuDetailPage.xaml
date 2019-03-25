@@ -100,13 +100,36 @@
                                    Margin="5,0"/>
                         </StackLayout>
 
-                        <Label Text="{Binding SelectedMenu.PriceString}"
+                        <Label x:Name="PriceNoDiscount"
+                               Text="{Binding SelectedMenu.PriceString}"
                                Grid.ColumnSpan="2"
                                Grid.Row="3"
                                FontSize="Small"
                                FontAttributes="Bold"
                                TextColor="{StaticResource DarkTextColor}"
                                Margin="20,0"/>
+                        <StackLayout x:Name="PriceWithDiscountLayout"
+                                     Grid.ColumnSpan="2"
+                                     Grid.Row="3"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="End"
+                                     Orientation="Horizontal"
+                                     BackgroundColor="Transparent"
+                                     Margin="20,0">
+                            <c:StrokeLabel Text="{Binding SelectedMenu.PriceString}"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="EndAndExpand"
+                                           FontSize="14"
+                                           TextColor="{StaticResource DarkTextColor}"
+                                           Margin="0"/>
+                            <Label x:Name="DiscountedPrice"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="End"
+                                   HorizontalTextAlignment="End"
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource ActiveColor}" />
+                        </StackLayout>
 
                         <Label Text="{Binding SelectedMenu.Headline}"
                                Grid.ColumnSpan="2"

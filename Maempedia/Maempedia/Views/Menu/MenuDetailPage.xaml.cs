@@ -3,6 +3,7 @@ using Maempedia.Interfaces;
 using Maempedia.Models;
 using Maempedia.ViewModels.Menu;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -51,6 +52,12 @@ namespace Maempedia.Views.Menu
             {
                 this.LikeImage.Source = "heart_blank.png";
             }
+
+            var item = this.ViewModel.SelectedMenu;
+            var hasDiscount = item.Discount != 0 && item.DiscountDaysLeft >= 0 && item.RemainingClaim > 0;
+            this.PriceWithDiscountLayout.IsVisible = hasDiscount;
+            this.PriceNoDiscount.IsVisible = !hasDiscount;
+            this.DiscountedPrice.Text = String.Format(new CultureInfo("id-ID"), "Rp. {0:N}", item.Price - (item.Price * item.Discount));
 
             await Task.Delay(500); // workaround for #30 [Android]Map.Pins.Add doesn't work when page OnAppearing
 

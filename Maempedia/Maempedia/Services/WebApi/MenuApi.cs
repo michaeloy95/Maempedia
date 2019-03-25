@@ -49,7 +49,7 @@ namespace Maempedia.Services.WebApi
             var menuList = new List<Menu>();
             foreach (JObject menu in data["menu"])
             {
-                menuList.Add(new Menu(menu));
+                menuList.Add(new Menu(menu, owner));
             }
 
             return menuList;
@@ -160,6 +160,24 @@ namespace Maempedia.Services.WebApi
             return data == null ? Tuple.Create(ServerResponseStatus.ERROR, string.Empty)
                 : data["status"].ToString() == "DENIED" ? Tuple.Create(ServerResponseStatus.INVALID, string.Empty)
                 : Tuple.Create(ServerResponseStatus.VALID, data["referencecode"].ToString());
+        }
+
+        public async Task<ServerResponseStatus> AddDiscount(string id, int discount, int maxClaim, string username, string password)
+        {
+            var values = new Dictionary<string, string>
+            {
+                { "description", string.Empty },
+                { "maximal_claim", maxClaim.ToString() },
+                { "discount_days_left", "30" },
+                { "discount_percentage", discount.ToString() },
+                { "username", username },
+                { "password", password }
+            };
+            var data = await this.PostToMaempedia($"add_discount.html?menu_id={id}", values);
+
+            return data == null ? ServerResponseStatus.ERROR
+                : data["status"].ToString() == "DENIED" ? ServerResponseStatus.INVALID
+                : ServerResponseStatus.VALID;
         }
     }
 }
