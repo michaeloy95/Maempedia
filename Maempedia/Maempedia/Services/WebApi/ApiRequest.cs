@@ -1,4 +1,5 @@
-﻿using Maempedia.Common;
+﻿#define PRODUCTION
+using Maempedia.Common;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
