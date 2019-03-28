@@ -105,7 +105,7 @@ workflows:
 
     release:
         envs:
-        - ENVIRONMENTS: "PRODUCTION"
+        - PRODUCTION: true
         - IOS_CONFIGURATION: AppStore
         - TAG: true
         before_run:
@@ -141,7 +141,7 @@ workflows:
 
     slack:
         envs:
-        - ENVIRONMENTS: "PRODUCTION"
+        - PRODUCTION: true
         - IOS_CONFIGURATION: Ad-Hoc
         - TAG: false
         before_run:
